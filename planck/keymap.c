@@ -58,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *    Tap for ] [ --------'-----------------------------------------------------'
    */
   [QWERTY_LAYER] = LAYOUT_planck_grid_wrapper(
-    KC_TAB,  _________________QWERTY_L1_________________, _________________QWERTY_R1_________________, KC_BSPC,
-    CTL_ESC, _________________QWERTY_L2_________________, _________________QWERTY_R2_________________, CTL_ENT,
-    KC_LSPO, _________________QWERTY_L3_________________, _________________QWERTY_R3_________________, KC_RSPC,
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, CTL_ENT,
+    KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,
     GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
@@ -156,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, KC_UNDS, KC_UNDS, _______, _______, _______, _______, _______
   ),
 
-  /* Numeric layer
+  /* Normal-Programming layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │  %  │  &  │  ?  │  +  │  @  │  $  │  _  │  [  │  ]  │  !  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
-  /* Shift-Numeric layer
+  /* Shift-Programming layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │     │ &&  │     │ +=  │ @q  │     │     │ []  │ ->  │ !=  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -256,6 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, __________MEDIA__________, KC_BRID, KC_SLEP, KC_SLEP, KC_BRIU, __________VOLUME_________, _______
   ),
 
+#if defined(FORCE_ENABLE_STENO)
   /* Stenography layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │  ⇥  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │
@@ -273,6 +274,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, _________________STENO_L3__________________, _________________STENO_R3___________________________,
     STN_EXIT,XXXXXXX, KC_LALT, KC_LGUI, ____STENO_AO____, ____STENO_EU____, KC_RGUI, KC_RALT, XXXXXXX, XXXXXXX
   ),
+#endif  // defined(FORCE_ENABLE_STENO)
 
   /* Keyboard settings layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -310,6 +312,7 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
       rgb_matrix_set_color(48, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
+#if defined(FORCE_ENABLE_STENO)
     case STENO_LAYER:
       rgb_matrix_set_color(36, 0xFF, 0x30, 0x00); // STN_EXIT
 
@@ -344,6 +347,7 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color(47, 0x00, 0x00, 0x00);
       rgb_matrix_set_color(48, 0x00, 0x00, 0x00);
       break;
+#endif  // defined(FORCE_ENABLE_STENO)
     case ADJUST_LAYER:
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
       rgb_matrix_set_color(44, 0xFF, 0xFF, 0xFF); // RAISE

@@ -24,9 +24,11 @@ float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
 void matrix_init_user() {
+#if defined(FORCE_ENABLE_STENO)
 #ifdef STENO_ENABLE
   steno_set_mode(STENO_MODE_GEMINI);
 #endif
+#endif  // defined(FORCE_ENABLE_STENO)
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
@@ -70,6 +72,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(SNAKE_LAYER);
       }
       return false;
+#if defined(FORCE_ENABLE_STENO)
     case STENO:
       if (record->event.pressed) {
 #ifdef AUDIO_ENABLE
@@ -90,6 +93,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(STENO_LAYER);
       }
       return false;
+#endif  // defined(FORCE_ENABLE_STENO)
     case SEND_VERSION:
       if (record->event.pressed) {
         SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP "@" QMK_VERSION " (" QMK_BUILDDATE ")");

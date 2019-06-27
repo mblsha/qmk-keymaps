@@ -1,3 +1,3 @@
-# STENO_ENABLE = yes
+STENO_ENABLE = no
 # COMBO_ENABLE = yes
 # BACKLIGHT_ENABLE = yes

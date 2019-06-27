@@ -19,11 +19,15 @@
 #include "quantum.h"
 #include "version.h"
 
+#define FORCE_ENABLE_STENO
+
+#if defined(FORCE_ENABLE_STENO)
 #ifdef STENO_ENABLE
 #include "keymap_steno.h"
 #else
 #include "keymap_plover.h"
 #endif
+#endif  // defined(FORCE_ENABLE_STENO)
 
 #ifdef RGB_MATRIX_ENABLE
 #include "rgb_matrix.h"
@@ -39,7 +43,9 @@ enum user_layers {
   RAISE_LAYER,
   NAV_LAYER,
   GUI_LAYER,
+#if defined(FORCE_ENABLE_STENO)
   STENO_LAYER,
+#endif  // defined(FORCE_ENABLE_STENO)
   ADJUST_LAYER
 };
 
@@ -48,12 +54,18 @@ enum user_keycodes {
   QWERTY,
   COLEMAK,
   STCH_EX,
+#if defined(FORCE_ENABLE_STENO)
   STENO,
   STN_EXIT,
+#endif  // defined(FORCE_ENABLE_STENO)
   SEND_MAKE,
   SEND_VERSION,
   DYNAMIC_MACRO_RANGE
 };
+
+#if !defined(FORCE_ENABLE_STENO)
+#define STENO XXXXXXX
+#endif  // !defined(FORCE_ENABLE_STENO)
 
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
