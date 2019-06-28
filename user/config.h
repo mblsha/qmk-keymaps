@@ -36,3 +36,5 @@
 
 // Delay needed for rotary encoder to trigger media keys
 #define TAP_CODE_DELAY 10
+
+#define AUDIO_CLICKY
