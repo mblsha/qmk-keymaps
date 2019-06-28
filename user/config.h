@@ -38,3 +38,5 @@
 #define TAP_CODE_DELAY 10
 
 #define AUDIO_CLICKY
+// This should limit the volume
+#define DAC_SAMPLE_MAX 65535U
