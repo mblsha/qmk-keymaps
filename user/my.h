@@ -36,13 +36,17 @@
 enum user_layers {
   QWERTY_LAYER,
   COLEMAK_LAYER,
+
   CAMEL_LAYER,
   KEBAB_LAYER,
   SNAKE_LAYER,
+
   LOWER_LAYER,
   RAISE_LAYER,
+
   NAV_LAYER,
   GUI_LAYER,
+
 #if defined(FORCE_ENABLE_STENO)
   STENO_LAYER,
 #endif  // defined(FORCE_ENABLE_STENO)
