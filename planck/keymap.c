@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [COLEMAK_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    _______, _______,
     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
-    _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    LOWER,   KC_DOT,  _______, _______,
+    _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    NPROGRM, KC_DOT,  _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 #else
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 │     │     │     │     │     │  ,  │  ,  │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  [LOWER_LAYER] = LAYOUT_planck_grid_wrapper(
+  [NORMAL_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,   KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM, _______,
     STCH_EX, KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR, KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS, _______,
     _______, KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE, KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______, _______,
@@ -218,18 +218,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │     │Home │PgUp │PgDn │ End │  ←  │  ↓  │  ↑  │  →  │     │     │
+   *                 │     │Home │PgUp │PgDn │ End │     │     │  ←  │  ↓  │  ↑  │  →  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │     │ ⌘ ← │ ⌘ ↑ │ ⌘ ↓ │ ⌘ → │ ⌥ ← │ ⌥ ↓ │ ⌥ ↑ │ ⌥ → │     │     │
+   *                 │     │ ⌘ ← │ ⌘ ↑ │ ⌘ ↓ │ ⌘ → │     │     │ ⌥ ← │ ⌥ ↓ │ ⌥ ↑ │ ⌥ → │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┼─────┤
    *                 │     │     │     │     │     │Lead ┃Lead ┃     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┴─────┘
    */
-  [NAV_LAYER] = LAYOUT_planck_grid_wrapper(
-    XXXXXXX, __________________NAV_L1___________________, __________________NAV_R1___________________, XXXXXXX,
-    _______, __________________NAV_L2___________________, __________________NAV_R2___________________, _______,
-    _______, __________________NAV_L3___________________, __________________NAV_R3___________________, _______,
-    _______, _______, _______, _______, XXXXXXX, LEADER,  LEADER, XXXXXXX, _______, _______, _______, _______
+  [LOWER_LAYER] = LAYOUT_planck_grid_wrapper(
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
+
+    XXXXXXX, LGUI(KC_LEFT), LGUI(KC_UP), LGUI(KC_DOWN), LGUI(KC_RGHT), XXXXXXX, XXXXXXX,
+                                                                   LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), XXXXXXX,
+    _______, _______, _______, _______, LOWER,   LEADER,  LEADER,  RAISE,   _______, _______, _______, _______
   ),
 
   /* GUI (window management/mouse/media controls) layer

@@ -41,6 +41,9 @@ enum user_layers {
   KEBAB_LAYER,
   SNAKE_LAYER,
 
+  NORMAL_PROGRAMMING_LAYER,
+  SHIFT_PROGRAMMING_LAYER,
+
   LOWER_LAYER,
   RAISE_LAYER,
 
@@ -73,6 +76,8 @@ enum user_keycodes {
 
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
+
+#define NPROGRM OSL(NORMAL_PROGRAMMING_LAYER)
 
 #define LOWER MO(LOWER_LAYER)
 #define RAISE MO(RAISE_LAYER)

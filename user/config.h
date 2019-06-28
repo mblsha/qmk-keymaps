@@ -39,4 +39,5 @@
 
 #define AUDIO_CLICKY
 // This should limit the volume
-#define DAC_SAMPLE_MAX 65535U
+// #define DAC_SAMPLE_MAX 65535U
+#define DAC_SAMPLE_MAX 10000U
