@@ -301,20 +301,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
+/* |----+----+----+----+----+----+----+----+----+----+----+----|
+ * |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 36 | 37 | 38 | 39 | 40 |   41    | 42 | 43 | 44 | 45 | 46 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ */
 void rgb_matrix_indicators_user(void) {
+  switch (biton32(layer_state)) {
+    case QWERTY_LAYER:
+    case COLEMAK_LAYER:
+      break;
+    default:
+      for (int i = 0; i < DRIVER_LED_TOTAL; ++i) {
+        rgb_matrix_set_color(i, 0x00, 0x00, 0x00);
+      }
+  }
+
   switch (biton32(layer_state)) {
     case LOWER_LAYER:
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
       break;
     case RAISE_LAYER:
-      rgb_matrix_set_color(44, 0xFF, 0xFF, 0xFF); // RAISE
-      break;
-    case NAV_LAYER:
-      rgb_matrix_set_color(43, 0xFF, 0xFF, 0xFF); // NAV_BSP
+      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case GUI_LAYER:
       rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
-      rgb_matrix_set_color(48, 0xFF, 0xFF, 0xFF); // GUI_R
+      rgb_matrix_set_color(46, 0xFF, 0xFF, 0xFF); // GUI_R
+      break;
+    case NORMAL_PROGRAMMING_LAYER:
+      for (int i = 12; i <= 23; ++i) {
+        rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+      }
       break;
 #if defined(FORCE_ENABLE_STENO)
     case STENO_LAYER:
@@ -354,7 +376,7 @@ void rgb_matrix_indicators_user(void) {
 #endif  // defined(FORCE_ENABLE_STENO)
     case ADJUST_LAYER:
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
-      rgb_matrix_set_color(44, 0xFF, 0xFF, 0xFF); // RAISE
+      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case CAMEL_LAYER:
     case KEBAB_LAYER:
@@ -363,8 +385,5 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color(41, 0x88, 0xFF, 0x00); // "Space bar"
       break;
   }
-
-  // Disable middle LED between keys in grid layout.
-  rgb_matrix_set_color(42, 0x00, 0x00, 0x00);
 }
 #endif

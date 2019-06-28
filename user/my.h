@@ -47,7 +47,6 @@ enum user_layers {
   LOWER_LAYER,
   RAISE_LAYER,
 
-  NAV_LAYER,
   GUI_LAYER,
 
 #if defined(FORCE_ENABLE_STENO)
@@ -92,8 +91,6 @@ enum user_keycodes {
 #define CTL_ENT CTL_T(KC_ENT)
 
 #define CAPITAL OSM(MOD_LSFT)
-
-#define NAV_BSP LT(NAV_LAYER, KC_BSPC)
 
 #define GUI_GRV LGUI(KC_GRV)
 
