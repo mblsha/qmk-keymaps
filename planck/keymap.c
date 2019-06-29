@@ -312,6 +312,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |----+----+----+----+----+----+----+----+----+----+----+----|
  */
 void rgb_matrix_indicators_user(void) {
+  // Clear the space bar LEDs.
+  palClearPad(GPIOB, 8);
+  palClearPad(GPIOB, 9);
+
   switch (biton32(layer_state)) {
     case QWERTY_LAYER:
     case COLEMAK_LAYER:
@@ -324,9 +328,11 @@ void rgb_matrix_indicators_user(void) {
 
   switch (biton32(layer_state)) {
     case LOWER_LAYER:
+      palSetPad(GPIOB, 9);
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
       break;
     case RAISE_LAYER:
+      palSetPad(GPIOB, 8);
       rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case GUI_LAYER:
@@ -375,6 +381,8 @@ void rgb_matrix_indicators_user(void) {
       break;
 #endif  // defined(FORCE_ENABLE_STENO)
     case ADJUST_LAYER:
+      palSetPad(GPIOB, 8);
+      palSetPad(GPIOB, 9);
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
       rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
