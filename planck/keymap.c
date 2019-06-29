@@ -296,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
     COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
-    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   MYRGB,   LIT_DEC, LIT_INC,         DYN_REC_STOP
+    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGB,   LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
 
@@ -331,6 +331,11 @@ void rgb_matrix_indicators_user(void) {
     case LOWER_LAYER:
       palSetPad(GPIOB, 9);
       rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
+      for (int i = 13; i <= 16; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+      for (int i = 25; i <= 28; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+
+      for (int i = 19; i <= 22; ++i) rgb_matrix_set_color(i, 0xFF, 0x00, 0x00);
+      for (int i = 31; i <= 34; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
       break;
     case RAISE_LAYER:
       palSetPad(GPIOB, 8);
