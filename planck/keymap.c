@@ -220,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *                 │     │Home │PgUp │PgDn │ End │     │     │  ←  │  ↓  │  ↑  │  →  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │ ⌘ ← │ ⌘ ↑ │ ⌘ ↓ │ ⌘ → │     │     │ ⌥ ← │ ⌥ ↓ │ ⌥ ↑ │ ⌥ → │     │
+   *                 │Shift│ ⌘ ← │ ⌘ ↑ │ ⌘ ↓ │ ⌘ → │     │     │ ⌥ ← │ ⌥ ↓ │ ⌥ ↑ │ ⌥ → │Shift│
    *                 ├─────┼─────┼─────┼─────┼─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┼─────┤
    *                 │     │     │     │     │     │Lead ┃Lead ┃     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┴─────┘
@@ -229,8 +229,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
 
-    XXXXXXX, LGUI(KC_LEFT), LGUI(KC_UP), LGUI(KC_DOWN), LGUI(KC_RGHT), XXXXXXX, XXXXXXX,
-                                                                   LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), XXXXXXX,
+    KC_LSFT, LGUI(KC_LEFT), LGUI(KC_UP), LGUI(KC_DOWN), LGUI(KC_RGHT), XXXXXXX, XXXXXXX,
+                                                                   LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), KC_RSFT,
     _______, _______, _______, _______, LOWER,   LEADER,  LEADER,  RAISE,   _______, _______, _______, _______
   ),
 
