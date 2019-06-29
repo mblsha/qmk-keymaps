@@ -296,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
     COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
-    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGB,   LIT_DEC, LIT_INC,         DYN_REC_STOP
+    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
 
@@ -311,6 +311,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | 36 | 37 | 38 | 39 | 40 |   41    | 42 | 43 | 44 | 45 | 46 |
  * |----+----+----+----+----+----+----+----+----+----+----+----|
  */
+uint8_t rgb_brightness(void) { return rgb_matrix_config.val; }
+
+void mysetcolor(int i, uint8_t red, uint8_t green, uint8_t blue) {
+  if (rgb_brightness() >= UINT8_MAX || (!red && !green && !blue)) {
+    // save a little bit of CPU
+    rgb_matrix_set_color(i, red, green, blue);
+    return;
+  }
+
+  float frac = (float)rgb_brightness() / UINT8_MAX;
+  rgb_matrix_set_color(i, frac * red, frac * green, frac * blue);
+}
+
+void set_planck_spacebar_led(stm32_gpio_t *a, int b) {
+  if (!rgb_brightness()) return;
+
+  palSetPad(a, b);
+}
+
 void rgb_matrix_indicators_user(void) {
   // Clear the space bar LEDs.
   palClearPad(GPIOB, 8);
@@ -329,79 +348,79 @@ void rgb_matrix_indicators_user(void) {
 
   switch (biton32(layer_state)) {
     case LOWER_LAYER:
-      palSetPad(GPIOB, 9);
-      rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
-      for (int i = 13; i <= 16; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
-      for (int i = 25; i <= 28; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+      set_planck_spacebar_led(GPIOB, 9);
+      mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
+      for (int i = 13; i <= 16; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
+      for (int i = 25; i <= 28; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
 
-      for (int i = 19; i <= 22; ++i) rgb_matrix_set_color(i, 0xFF, 0x00, 0x00);
-      for (int i = 31; i <= 34; ++i) rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+      for (int i = 19; i <= 22; ++i) mysetcolor(i, 0xFF, 0x00, 0x00);
+      for (int i = 31; i <= 34; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
       break;
     case RAISE_LAYER:
-      palSetPad(GPIOB, 8);
-      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
+      set_planck_spacebar_led(GPIOB, 8);
+      mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case GUI_LAYER:
-      rgb_matrix_set_color(36, 0xFF, 0xFF, 0xFF); // GUI_L
-      rgb_matrix_set_color(46, 0xFF, 0xFF, 0xFF); // GUI_R
+      mysetcolor(36, 0xFF, 0xFF, 0xFF); // GUI_L
+      mysetcolor(46, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
     case NORMAL_PROGRAMMING_LAYER:
       for (int i = 12; i <= 35; ++i) {
-        rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+        mysetcolor(i, 0xFF, 0xFF, 0xFF);
       }
       break;
     case SHIFT_PROGRAMMING_LAYER:
       for (int i = 0; i <= 11; ++i) {
-        rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+        mysetcolor(i, 0xFF, 0xFF, 0xFF);
       }
       break;
 #if defined(FORCE_ENABLE_STENO)
     case STENO_LAYER:
-      rgb_matrix_set_color(36, 0xFF, 0x30, 0x00); // STN_EXIT
+      mysetcolor(36, 0xFF, 0x30, 0x00); // STN_EXIT
 
       // Mask out everything but alphabetic steno keys.
-      rgb_matrix_set_color(0, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(1, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(2, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(3, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(4, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(5, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(6, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(7, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(8, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(9, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(10, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(11, 0x00, 0x00, 0x00);
+      mysetcolor(0, 0x00, 0x00, 0x00);
+      mysetcolor(1, 0x00, 0x00, 0x00);
+      mysetcolor(2, 0x00, 0x00, 0x00);
+      mysetcolor(3, 0x00, 0x00, 0x00);
+      mysetcolor(4, 0x00, 0x00, 0x00);
+      mysetcolor(5, 0x00, 0x00, 0x00);
+      mysetcolor(6, 0x00, 0x00, 0x00);
+      mysetcolor(7, 0x00, 0x00, 0x00);
+      mysetcolor(8, 0x00, 0x00, 0x00);
+      mysetcolor(9, 0x00, 0x00, 0x00);
+      mysetcolor(10, 0x00, 0x00, 0x00);
+      mysetcolor(11, 0x00, 0x00, 0x00);
 
-      rgb_matrix_set_color(12, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(17, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(18, 0x00, 0x00, 0x00);
+      mysetcolor(12, 0x00, 0x00, 0x00);
+      mysetcolor(17, 0x00, 0x00, 0x00);
+      mysetcolor(18, 0x00, 0x00, 0x00);
 
-      rgb_matrix_set_color(24, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(29, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(30, 0x00, 0x00, 0x00);
+      mysetcolor(24, 0x00, 0x00, 0x00);
+      mysetcolor(29, 0x00, 0x00, 0x00);
+      mysetcolor(30, 0x00, 0x00, 0x00);
 
-      rgb_matrix_set_color(37, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(38, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(39, 0x00, 0x00, 0x00);
+      mysetcolor(37, 0x00, 0x00, 0x00);
+      mysetcolor(38, 0x00, 0x00, 0x00);
+      mysetcolor(39, 0x00, 0x00, 0x00);
 
-      rgb_matrix_set_color(45, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(46, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(47, 0x00, 0x00, 0x00);
-      rgb_matrix_set_color(48, 0x00, 0x00, 0x00);
+      mysetcolor(45, 0x00, 0x00, 0x00);
+      mysetcolor(46, 0x00, 0x00, 0x00);
+      mysetcolor(47, 0x00, 0x00, 0x00);
+      mysetcolor(48, 0x00, 0x00, 0x00);
       break;
 #endif  // defined(FORCE_ENABLE_STENO)
     case ADJUST_LAYER:
-      palSetPad(GPIOB, 8);
-      palSetPad(GPIOB, 9);
-      rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF); // LOWER
-      rgb_matrix_set_color(42, 0xFF, 0xFF, 0xFF); // RAISE
+      set_planck_spacebar_led(GPIOB, 8);
+      set_planck_spacebar_led(GPIOB, 9);
+      mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
+      mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
       break;
     case CAMEL_LAYER:
     case KEBAB_LAYER:
     case SNAKE_LAYER:
-      rgb_matrix_set_color(12, 0xFF, 0x30, 0x00); // STCH_EX
-      rgb_matrix_set_color(41, 0x88, 0xFF, 0x00); // "Space bar"
+      mysetcolor(12, 0xFF, 0x30, 0x00); // STCH_EX
+      mysetcolor(41, 0x88, 0xFF, 0x00); // "Space bar"
       break;
   }
 }

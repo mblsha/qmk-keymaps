@@ -33,7 +33,14 @@ void matrix_init_user() {
 
 void enable_rgb_without_any_leds_by_default(void) {
   rgblight_enable();
+  rgb_matrix_config.val = UINT8_MAX;
+  rgb_matrix_increase_val();
   rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+}
+
+void rgb_set_brightness_to_zero(void) {
+  rgb_matrix_config.val = 0;
+  rgb_matrix_decrease_val();
 }
 
 void keyboard_post_init_user() {
@@ -131,6 +138,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MYRGB:
       if (record->event.pressed) {
         enable_rgb_without_any_leds_by_default();
+      }
+      break;
+    case MYRGBDM:
+      if (record->event.pressed) {
+        rgb_set_brightness_to_zero();
       }
       break;
     case NPRG_SP:

@@ -75,6 +75,7 @@ enum user_keycodes {
 
   // Enable RGB, disable all animations.
   MYRGB,
+  MYRGBDM, // dim leds
 
   SEND_MAKE,
   SEND_VERSION,
