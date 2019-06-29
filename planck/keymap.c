@@ -214,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Directional navigation layer
    *
-   *          Large movements -----/```````````````````\   /```````````````````\----- Vim-style arrow keys
+   *    Large movements -----/```````````````````\               /```````````````````\----- Vim-style arrow keys
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -288,7 +288,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *        Audio -- │Colem│Voic-│Voic+│Mus +│Mus -│MIDI+│MIDI-│Aud +│Aud -│     │Play2│Rec 2│ -- Record/play macro 2
    *                 ├─────┼─────┼─────┼─────╆━━━━━╅─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┤
-   *                 │Steno│     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Toggl│Brig-│Brig+│Stop │ -- Stop recording macro
+   *                 │Steno│     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Plain│Brig-│Brig+│Stop │ -- Stop recording macro
    *                 └─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┘
    *                Swap GUI/Alt _/________/             \_____________\_ Backlight _/
    */
@@ -296,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
     COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
-    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   LIT_TOG, LIT_DEC, LIT_INC,         DYN_REC_STOP
+    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   LIT_TOG, LIT_TOG, RAISE,   MYRGB,   LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
 
@@ -319,11 +319,12 @@ void rgb_matrix_indicators_user(void) {
   switch (biton32(layer_state)) {
     case QWERTY_LAYER:
     case COLEMAK_LAYER:
+      if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
+        rgb_matrix_set_color_all(0x00, 0x00, 0x00);
+      }
       break;
     default:
-      for (int i = 0; i < DRIVER_LED_TOTAL; ++i) {
-        rgb_matrix_set_color(i, 0x00, 0x00, 0x00);
-      }
+      rgb_matrix_set_color_all(0x00, 0x00, 0x00);
   }
 
   switch (biton32(layer_state)) {
@@ -340,7 +341,7 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color(46, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
     case NORMAL_PROGRAMMING_LAYER:
-      for (int i = 12; i <= 23; ++i) {
+      for (int i = 12; i <= 35; ++i) {
         rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
       }
       break;

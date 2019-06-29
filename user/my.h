@@ -73,6 +73,9 @@ enum user_keycodes {
   STN_EXIT,
 #endif  // defined(FORCE_ENABLE_STENO)
 
+  // Enable RGB, disable all animations.
+  MYRGB,
+
   SEND_MAKE,
   SEND_VERSION,
   DYNAMIC_MACRO_RANGE

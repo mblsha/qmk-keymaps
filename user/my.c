@@ -31,6 +31,17 @@ void matrix_init_user() {
 #endif  // defined(FORCE_ENABLE_STENO)
 }
 
+void enable_rgb_without_any_leds_by_default(void) {
+  rgblight_enable();
+  rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+}
+
+void keyboard_post_init_user() {
+  set_single_persistent_default_layer(COLEMAK_LAYER);
+
+  enable_rgb_without_any_leds_by_default();
+}
+
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
 }
@@ -117,6 +128,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_TAP(X_ENTER));
       }
       return false;
+    case MYRGB:
+      if (record->event.pressed) {
+        enable_rgb_without_any_leds_by_default();
+      }
+      break;
     case NPRG_SP:
       if (record->event.pressed) {
         SEND_STRING(", ");
