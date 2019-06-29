@@ -117,6 +117,86 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SS_TAP(X_ENTER));
       }
       return false;
+    case NPRG_SP:
+      if (record->event.pressed) {
+        SEND_STRING(", ");
+      }
+      break;
+    case SPRG_H1:
+      if (record->event.pressed) {
+        SEND_STRING("&&");
+      }
+      break;
+    case SPRG_H3:
+      if (record->event.pressed) {
+        SEND_STRING("+=");
+      }
+      break;
+    case SPRG_H4:
+      if (record->event.pressed) {
+        SEND_STRING("@q");
+      }
+      break;
+    case SPRG_H7:
+      if (record->event.pressed) {
+        SEND_STRING("[]");
+      }
+      break;
+    case SPRG_H8:
+      if (record->event.pressed) {
+        SEND_STRING("->");
+      }
+      break;
+    case SPRG_H9:
+      if (record->event.pressed) {
+        SEND_STRING("!=");
+      }
+      break;
+    case SPRG_M0:
+      if (record->event.pressed) {
+        SEND_STRING("/=");
+      }
+      break;
+    case SPRG_M1:
+      if (record->event.pressed) {
+        SEND_STRING("()");
+      }
+      break;
+    case SPRG_M2:
+      if (record->event.pressed) {
+        SEND_STRING("==");
+      }
+      break;
+    case SPRG_M4:
+      if (record->event.pressed) {
+        SEND_STRING("{}");
+      }
+      break;
+    case SPRG_M6:
+      if (record->event.pressed) {
+        SEND_STRING("::");
+      }
+      break;
+    case SPRG_M9:
+      if (record->event.pressed) {
+        SEND_STRING("-=");
+      }
+      break;
+    case SPRG_L4:
+      if (record->event.pressed) {
+        SEND_STRING("||");
+      }
+      break;
+    case SPRG_L7:
+      if (record->event.pressed) {
+        SEND_STRING("<=");
+      }
+      break;
+    case SPRG_L8:
+      if (record->event.pressed) {
+        SEND_STRING(">=");
+      }
+      break;
   }
 
   return true;
