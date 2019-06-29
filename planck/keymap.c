@@ -166,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NORMAL_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,   KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM, _______,
     STCH_EX, KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR, KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS, _______,
-    _______, KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE, KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______, _______,
+    SPROGRM, KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE, KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______, SPROGRM,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
@@ -182,12 +182,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  /* [LOWER_LAYER] = LAYOUT_planck_grid_wrapper( */
-  /*   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, */
-  /*   STCH_EX, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, */
-  /*   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, */
-  /*   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ */
-  /* ), */
+  [SHIFT_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    STCH_EX, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    NPROGRM, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, NPROGRM,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
 
   /* Symbol layer
    *
@@ -341,6 +341,11 @@ void rgb_matrix_indicators_user(void) {
       break;
     case NORMAL_PROGRAMMING_LAYER:
       for (int i = 12; i <= 23; ++i) {
+        rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
+      }
+      break;
+    case SHIFT_PROGRAMMING_LAYER:
+      for (int i = 0; i <= 11; ++i) {
         rgb_matrix_set_color(i, 0xFF, 0xFF, 0xFF);
       }
       break;

@@ -57,13 +57,17 @@ enum user_layers {
 
 enum user_keycodes {
   LEADER = SAFE_RANGE,
+
   QWERTY,
   COLEMAK,
+
   STCH_EX,
+
 #if defined(FORCE_ENABLE_STENO)
   STENO,
   STN_EXIT,
 #endif  // defined(FORCE_ENABLE_STENO)
+
   SEND_MAKE,
   SEND_VERSION,
   DYNAMIC_MACRO_RANGE
@@ -77,6 +81,7 @@ enum user_keycodes {
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
 
 #define NPROGRM OSL(NORMAL_PROGRAMMING_LAYER)
+#define SPROGRM OSL(SHIFT_PROGRAMMING_LAYER)
 
 #define LOWER MO(LOWER_LAYER)
 #define RAISE MO(RAISE_LAYER)

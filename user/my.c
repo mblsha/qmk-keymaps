@@ -70,6 +70,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(CAMEL_LAYER);
         layer_off(KEBAB_LAYER);
         layer_off(SNAKE_LAYER);
+
+        layer_off(NORMAL_PROGRAMMING_LAYER);
+        layer_off(SHIFT_PROGRAMMING_LAYER);
       }
       return false;
 #if defined(FORCE_ENABLE_STENO)
