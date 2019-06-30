@@ -305,16 +305,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
-/* |----+----+----+----+----+----+----+----+----+----+----+----|
- * |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |
- * |----+----+----+----+----+----+----+----+----+----+----+----|
- * | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
- * |----+----+----+----+----+----+----+----+----+----+----+----|
- * | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 |
- * |----+----+----+----+----+----+----+----+----+----+----+----|
- * | 36 | 37 | 38 | 39 | 40 |   41    | 42 | 43 | 44 | 45 | 46 |
- * |----+----+----+----+----+----+----+----+----+----+----+----|
- */
 uint8_t rgb_brightness(void) { return rgb_matrix_config.val; }
 
 void mysetcolor(int i, uint8_t red, uint8_t green, uint8_t blue) {
@@ -334,6 +324,16 @@ void set_planck_spacebar_led(stm32_gpio_t *a, int b) {
   palSetPad(a, b);
 }
 
+/* |----+----+----+----+----+----+----+----+----+----+----+----|
+ * |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ * | 36 | 37 | 38 | 39 | 40 |   41    | 42 | 43 | 44 | 45 | 46 |
+ * |----+----+----+----+----+----+----+----+----+----+----+----|
+ */
 void rgb_matrix_indicators_user(void) {
   // Clear the space bar LEDs.
   palClearPad(GPIOB, 8);
@@ -363,6 +363,7 @@ void rgb_matrix_indicators_user(void) {
     case RAISE_LAYER:
       set_planck_spacebar_led(GPIOB, 8);
       mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
+      mysetcolor(12, 0xFF, 0x30, 0x00); // STCH_EX
       break;
     case GUI_LAYER:
       mysetcolor(36, 0xFF, 0xFF, 0xFF); // GUI_L
@@ -419,6 +420,18 @@ void rgb_matrix_indicators_user(void) {
       set_planck_spacebar_led(GPIOB, 9);
       mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
       mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
+
+      mysetcolor(1, 0xFF, 0x30, 0x00); // RESET
+      mysetcolor(12, 0xFF, 0x30, 0x00); // QWERTY
+      mysetcolor(24, 0xFF, 0x30, 0x00); // COLEMAK
+
+      // Color
+      mysetcolor(15, 0x30, 0x00, 0xFF);
+      mysetcolor(16, 0x30, 0x00, 0xFF);
+      mysetcolor(41, 0x30, 0x00, 0xFF);
+      mysetcolor(43, 0x30, 0x00, 0xFF);
+      mysetcolor(44, 0x30, 0x00, 0xFF);
+      mysetcolor(45, 0x30, 0x00, 0xFF);
       break;
     case CAMEL_LAYER:
     case KEBAB_LAYER:
