@@ -251,14 +251,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MYPLAY  KC_F4
 #define MYNEXT  KC_F5
 #define MYPREV  KC_F6
-#define MYBRIU  KC_F15
-#define MYBRID  KC_F14
 #define MYSLEEP S(KC_F12)
   [GUI_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_D, XXXXXXX, XXXXXXX, WM_PREV, WM_NW,   WM_N,    WM_NE,   _______,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, XXXXXXX, XXXXXXX, WM_FULL, WM_W,    WM_CNTR, WM_E,    _______,
     _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, XXXXXXX, XXXXXXX, WM_NEXT, WM_SW,   WM_S,    WM_SE,   _______,
-    _______, MYPLAY,  MYPREV,  MYNEXT,  MYBRID,  MYSLEEP, MYSLEEP, MYBRIU,  KC_MUTE, KC_VOLD, KC_VOLU, _______
+    _______, MYPLAY,  MYPREV,  MYNEXT,  KC_BRID, MYSLEEP, MYSLEEP, KC_BRIU, KC_MUTE, KC_VOLD, KC_VOLU, _______
   ),
 
 #if defined(FORCE_ENABLE_STENO)
