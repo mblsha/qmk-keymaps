@@ -75,6 +75,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(COLEMAK_LAYER);
       }
       return false;
+    case ENGLISH:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(COLEMAK_LAYER);
+      }
+      break;
+    case RUSSIAN:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(COLEMAK_RUS_LAYER);
+      }
+      break;
     case STCH_EX:
       if (record->event.pressed) {
         layer_off(CAMEL_LAYER);

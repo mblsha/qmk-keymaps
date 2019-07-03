@@ -60,14 +60,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
-#if defined(USE_NORMAN)
   /* Base layer (Norman)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │     │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *                 │     │  A  │  S  │  E  │  T  │  G  │  Y  │  N  │  I  │  O  │  H  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │  Z  │  X  │  C  │  V  │  B  │  P  │  M  │N-Prg│  .  │     │     │
+   *                 │ Eng │  Z  │  X  │  C  │  V  │  B  │  P  │  M  │N-Prg│  .  │     │ Rus │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
@@ -75,28 +74,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [COLEMAK_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
-    _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    NPROGRM, KC_DOT,  _______, _______,
+    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    NPROGRM, KC_DOT,  _______, RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
-#else
-  /* Base layer (Colemak)
+
+  /* Base layer (Norman)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-   *                 │     │  Q  │  W  │  F  │  P  │  G  │  J  │  L  │  U  │  Y  │  ;  │     │
+   *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │  ;  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │  A  │  R  │  S  │  T  │  D  │  H  │  N  │  E  │  I  │  O  │     │
+   *                 │     │  A  │  S  │  E  │  T  │  G  │  Y  │  N  │  I  │  O  │  H  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │     │  Z  │  X  │  C  │  V  │  B  │  K  │  M  │  ,  │  .  │  /  │     │
+   *                 │ Eng │  Z  │  X  │  C  │  V  │  B  │  P  │  M  │  ,  │  .  │  /  │ Rus │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  [COLEMAK_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, _________________COLEMAK_L1________________, _________________COLEMAK_R1________________, _______,
-    _______, _________________COLEMAK_L2________________, _________________COLEMAK_R2________________, _______,
-    _______, _________________COLEMAK_L3________________, _________________COLEMAK_R3________________, _______,
+  [COLEMAK_RUS_LAYER] = LAYOUT_planck_grid_wrapper(
+    _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
+    _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
+    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
-#endif
 
   /* Stitching layer (camel)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -318,6 +316,7 @@ void rgb_matrix_indicators_user(void) {
   switch (biton32(layer_state)) {
     case QWERTY_LAYER:
     case COLEMAK_LAYER:
+    case COLEMAK_RUS_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         rgb_matrix_set_color_all(0x00, 0x00, 0x00);
       }
@@ -327,6 +326,12 @@ void rgb_matrix_indicators_user(void) {
   }
 
   switch (biton32(layer_state)) {
+    case COLEMAK_LAYER:
+      mysetcolor(40, 0x88, 0xFF, 0x00);
+      break;
+    case COLEMAK_RUS_LAYER:
+      mysetcolor(42, 0x88, 0xFF, 0x00);
+      break;
     case LOWER_LAYER:
       set_planck_spacebar_led(GPIOB, 9);
       mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
