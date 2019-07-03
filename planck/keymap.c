@@ -255,26 +255,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, MYPLAY,  MYPREV,  MYNEXT,  KC_BRID, MYSLEEP, MYSLEEP, KC_BRIU, KC_MUTE,  KC_VOLD, KC_VOLU, _______
   ),
 
-#if defined(FORCE_ENABLE_STENO)
-  /* Stenography layer
-   *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-   *                 │  ⇥  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │  #  │
-   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │Res 1│     │  T  │  P  │  H  │     ┆     │  F  │  P  │  L  │  T  │  D  │
-   *                 ├─────┼╌ S ╌┼─────┼─────┼─────┼╌╌╌╌ * ╌╌╌╌┼─────┼─────┼─────┼─────┼─────┤
-   *                 │Res 2│     │  K  │  W  │  R  │     ┆     │  R  │  B  │  G  │  S  │  Z  │
-   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │Exit │     │  ⌥  │  ⌘  │  A  │  O  │  E  │  U  │  ⌘  │  ⌥  │ Pwr │ FN  │
-   *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
-   */
-  [STENO_LAYER] = LAYOUT_planck_grid_wrapper(
-    KC_TAB,  _________________STENO_L1__________________, _________________STENO_R1___________________________,
-    CTL_ESC, _________________STENO_L2__________________, _________________STENO_R2___________________________,
-    XXXXXXX, _________________STENO_L3__________________, _________________STENO_R3___________________________,
-    STN_EXIT,XXXXXXX, KC_LALT, KC_LGUI, ____STENO_AO____, ____STENO_EU____, KC_RGUI, KC_RALT, XXXXXXX, XXXXXXX
-  ),
-#endif  // defined(FORCE_ENABLE_STENO)
-
 /* CK_TOGG - Toggles the status (will play sound if enabled) */
 /* CK_RST - Resets the frequency to the default state (plays sound at default frequency) */
 /* CK_UP - Increases the frequency of the clicks (plays sound at new frequency) */
@@ -288,7 +268,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *        Audio -- │Colem│Voic-│Voic+│Mus +│Mus -│MIDI+│MIDI-│Aud +│Aud -│     │Play2│Rec 2│ -- Record/play macro 2
    *                 ├─────┼─────┼─────┼─────╆━━━━━╅─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┤
-   *                 │Steno│     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Plain│Brig-│Brig+│Stop │ -- Stop recording macro
+   *                 │     │     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Plain│Brig-│Brig+│Stop │ -- Stop recording macro
    *                 └─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┘
    *                Swap GUI/Alt _/________/             \_____________\_ Backlight _/
    */
@@ -296,7 +276,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
     COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
-    STENO,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
+    _______,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
 
@@ -375,42 +355,6 @@ void rgb_matrix_indicators_user(void) {
         mysetcolor(i, 0xFF, 0xFF, 0xFF);
       }
       break;
-#if defined(FORCE_ENABLE_STENO)
-    case STENO_LAYER:
-      mysetcolor(36, 0xFF, 0x30, 0x00); // STN_EXIT
-
-      // Mask out everything but alphabetic steno keys.
-      mysetcolor(0, 0x00, 0x00, 0x00);
-      mysetcolor(1, 0x00, 0x00, 0x00);
-      mysetcolor(2, 0x00, 0x00, 0x00);
-      mysetcolor(3, 0x00, 0x00, 0x00);
-      mysetcolor(4, 0x00, 0x00, 0x00);
-      mysetcolor(5, 0x00, 0x00, 0x00);
-      mysetcolor(6, 0x00, 0x00, 0x00);
-      mysetcolor(7, 0x00, 0x00, 0x00);
-      mysetcolor(8, 0x00, 0x00, 0x00);
-      mysetcolor(9, 0x00, 0x00, 0x00);
-      mysetcolor(10, 0x00, 0x00, 0x00);
-      mysetcolor(11, 0x00, 0x00, 0x00);
-
-      mysetcolor(12, 0x00, 0x00, 0x00);
-      mysetcolor(17, 0x00, 0x00, 0x00);
-      mysetcolor(18, 0x00, 0x00, 0x00);
-
-      mysetcolor(24, 0x00, 0x00, 0x00);
-      mysetcolor(29, 0x00, 0x00, 0x00);
-      mysetcolor(30, 0x00, 0x00, 0x00);
-
-      mysetcolor(37, 0x00, 0x00, 0x00);
-      mysetcolor(38, 0x00, 0x00, 0x00);
-      mysetcolor(39, 0x00, 0x00, 0x00);
-
-      mysetcolor(45, 0x00, 0x00, 0x00);
-      mysetcolor(46, 0x00, 0x00, 0x00);
-      mysetcolor(47, 0x00, 0x00, 0x00);
-      mysetcolor(48, 0x00, 0x00, 0x00);
-      break;
-#endif  // defined(FORCE_ENABLE_STENO)
     case ADJUST_LAYER:
       set_planck_spacebar_led(GPIOB, 8);
       set_planck_spacebar_led(GPIOB, 9);

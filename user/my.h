@@ -19,16 +19,6 @@
 #include "quantum.h"
 #include "version.h"
 
-#define FORCE_ENABLE_STENO
-
-#if defined(FORCE_ENABLE_STENO)
-#ifdef STENO_ENABLE
-#include "keymap_steno.h"
-#else
-#include "keymap_plover.h"
-#endif
-#endif  // defined(FORCE_ENABLE_STENO)
-
 #ifdef RGB_MATRIX_ENABLE
 #include "rgb_matrix.h"
 #endif
@@ -49,9 +39,6 @@ enum user_layers {
 
   GUI_LAYER,
 
-#if defined(FORCE_ENABLE_STENO)
-  STENO_LAYER,
-#endif  // defined(FORCE_ENABLE_STENO)
   ADJUST_LAYER
 };
 
@@ -68,11 +55,6 @@ enum user_keycodes {
   SPRG_M0, SPRG_M1, SPRG_M2, SPRG_M4, SPRG_M6, SPRG_M9,
   SPRG_L4, SPRG_L7, SPRG_L8,
 
-#if defined(FORCE_ENABLE_STENO)
-  STENO,
-  STN_EXIT,
-#endif  // defined(FORCE_ENABLE_STENO)
-
   // Enable RGB, disable all animations.
   MYRGB,
   MYRGBDM, // dim leds
@@ -81,10 +63,6 @@ enum user_keycodes {
   SEND_VERSION,
   DYNAMIC_MACRO_RANGE
 };
-
-#if !defined(FORCE_ENABLE_STENO)
-#define STENO XXXXXXX
-#endif  // !defined(FORCE_ENABLE_STENO)
 
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
@@ -200,30 +178,6 @@ enum user_keycodes {
 #define __________________GUI_R1___________________ XXXXXXX, WM_PREV, WM_NW,   WM_N,    WM_NE
 #define __________________GUI_R2___________________ XXXXXXX, WM_FULL, WM_W,    WM_CNTR, WM_E
 #define __________________GUI_R3___________________ XXXXXXX, WM_NEXT, WM_SW,   WM_S,    WM_SE
-
-#ifdef STENO_ENABLE
-#define _________________STENO_L1__________________ STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6
-#define _________________STENO_L2__________________ STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1
-#define _________________STENO_L3__________________ STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2
-
-#define _________________STENO_R1___________________________ STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC
-#define _________________STENO_R2___________________________ STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR
-#define _________________STENO_R3___________________________ STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR
-
-#define ____STENO_AO____ STN_A, STN_O
-#define ____STENO_EU____ STN_E, STN_U
-#else
-#define _________________STENO_L1__________________ PV_NUM,  PV_NUM,  PV_NUM,  PV_NUM,  PV_NUM
-#define _________________STENO_L2__________________ PV_LS,   PV_LT,   PV_LP,   PV_LH,   PV_STAR
-#define _________________STENO_L3__________________ PV_LS,   PV_LK,   PV_LW,   PV_LR,   PV_STAR
-
-#define _________________STENO_R1___________________________ PV_NUM,  PV_NUM,  PV_NUM,  PV_NUM,  PV_NUM,  PV_NUM
-#define _________________STENO_R2___________________________ PV_STAR, PV_RF,   PV_RP,   PV_RL,   PV_RT,   PV_RD
-#define _________________STENO_R3___________________________ PV_STAR, PV_RR,   PV_RB,   PV_RG,   PV_RS,   PV_RZ
-
-#define ____STENO_AO____ PV_A, PV_O
-#define ____STENO_EU____ PV_E, PV_U
-#endif
 
 #define __________VOLUME_________ KC_MUTE, KC_VOLD, KC_VOLU
 #define __________MEDIA__________ KC_MPRV, KC_MPLY, KC_MNXT

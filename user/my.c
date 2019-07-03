@@ -23,14 +23,6 @@ float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
-void matrix_init_user() {
-#if defined(FORCE_ENABLE_STENO)
-#ifdef STENO_ENABLE
-  steno_set_mode(STENO_MODE_GEMINI);
-#endif
-#endif  // defined(FORCE_ENABLE_STENO)
-}
-
 void enable_rgb_without_any_leds_by_default(void) {
   rgblight_enable();
   rgb_matrix_config.val = UINT8_MAX;
@@ -93,28 +85,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(SHIFT_PROGRAMMING_LAYER);
       }
       return false;
-#if defined(FORCE_ENABLE_STENO)
-    case STENO:
-      if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-        stop_all_notes();
-        PLAY_SONG(plover_song);
-#endif
-        layer_off(RAISE_LAYER);
-        layer_off(LOWER_LAYER);
-        layer_off(ADJUST_LAYER);
-        layer_on(STENO_LAYER);
-      }
-      return false;
-    case STN_EXIT:
-      if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-        PLAY_SONG(plover_gb_song);
-#endif
-        layer_off(STENO_LAYER);
-      }
-      return false;
-#endif  // defined(FORCE_ENABLE_STENO)
     case SEND_VERSION:
       if (record->event.pressed) {
         SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP "@" QMK_VERSION " (" QMK_BUILDDATE ")");
