@@ -54,6 +54,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t shift_english_timer;
   static uint16_t shift_russian_timer;
+  static uint16_t kShiftTimeout = 150;
 
   if (!process_record_dynamic_macro(keycode, record)) {
     return false;
@@ -84,7 +85,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(KC_LSHIFT);
       } else {
         unregister_code(KC_LSHIFT);
-        if (timer_elapsed(shift_english_timer) < TAPPING_TERM) {
+        if (timer_elapsed(shift_english_timer) < kShiftTimeout) {
           layer_off(NORMAN_RUS_LAYER);
           layer_on(NORMAN_ENG_LAYER);
 
@@ -98,7 +99,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(KC_LSHIFT);
       } else {
         unregister_code(KC_LSHIFT);
-        if (timer_elapsed(shift_russian_timer) < TAPPING_TERM) {
+        if (timer_elapsed(shift_russian_timer) < kShiftTimeout) {
           layer_off(NORMAN_ENG_LAYER);
           layer_on(NORMAN_RUS_LAYER);
 
