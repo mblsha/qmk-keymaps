@@ -58,6 +58,10 @@ enum user_keycodes {
 
   STCH_EX,
 
+  // Send comma when pressed with shift, and act as an
+  // OSL(NORMAL_PROGRAMMING_LAYER) when pressed alone
+  NPRG_CM,
+
   NPRG_SP,
   SPRG_H1, SPRG_H3, SPRG_H4, SPRG_H7, SPRG_H8, SPRG_H9,
   SPRG_M0, SPRG_M1, SPRG_M2, SPRG_M4, SPRG_M6, SPRG_M9,

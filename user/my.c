@@ -148,6 +148,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgb_set_brightness_to_zero();
       }
       return false;
+    case NPRG_CM: {
+        bool SHIFTED = (get_mods() & MOD_BIT(KC_LSHIFT)) ||
+                       (get_mods() & MOD_BIT(KC_RSHIFT));
+
+        if (record->event.pressed) {
+          if (SHIFTED) {
+            SEND_STRING(",");
+          } else {
+            set_oneshot_layer(NORMAL_PROGRAMMING_LAYER, ONESHOT_START);
+          }
+        } else {
+          if (SHIFTED) {
+            // noop
+          } else {
+            clear_oneshot_layer_state(ONESHOT_PRESSED);
+          }
+        }
+        return false;
+      }
     case NPRG_SP:
       if (record->event.pressed) {
         SEND_STRING(", ");
