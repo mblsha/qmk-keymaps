@@ -60,6 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
+  // TODO: Add mod tap on home row: Ctrl, Shift, Opt, Command, Raise
   /* Base layer (Norman)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │     │     │
@@ -114,6 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
+#if 0
   /* Stitching layer (camel)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
@@ -167,6 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, KC_UNDS, KC_UNDS, _______, _______, _______, _______, _______
   ),
+#endif
 
   /* Normal-Programming layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -409,12 +412,14 @@ void rgb_matrix_indicators_user(void) {
       mysetcolor(44, 0x30, 0x00, 0xFF);
       mysetcolor(45, 0x30, 0x00, 0xFF);
       break;
+#if 0
     case CAMEL_LAYER:
     case KEBAB_LAYER:
     case SNAKE_LAYER:
       mysetcolor(12, 0xFF, 0x30, 0x00); // STCH_EX
       mysetcolor(41, 0x88, 0xFF, 0x00); // "Space bar"
       break;
+#endif
   }
 }
 #endif

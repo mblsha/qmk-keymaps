@@ -110,9 +110,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case STCH_EX:
       if (record->event.pressed) {
+#if 0
         layer_off(CAMEL_LAYER);
         layer_off(KEBAB_LAYER);
         layer_off(SNAKE_LAYER);
+#endif
 
         layer_off(NORMAL_PROGRAMMING_LAYER);
         layer_off(SHIFT_PROGRAMMING_LAYER);

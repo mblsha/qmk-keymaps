@@ -70,6 +70,7 @@ LEADER_DICT {
     return leader_terminate();
   }
 
+#if 0
   LEADER(KC_SPC, KC_SPC) {
     layer_off(CAMEL_LAYER);
     layer_off(KEBAB_LAYER);
@@ -91,6 +92,7 @@ LEADER_DICT {
     layer_on(SNAKE_LAYER);
     return leader_terminate();
   }
+#endif
 
 #ifdef PRIVATE_MACROS
   LEADER(KC_D, KC_E) {
