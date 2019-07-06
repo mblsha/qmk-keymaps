@@ -23,6 +23,7 @@
 #include "rgb_matrix.h"
 #endif
 
+// Limit of 15 layers in total.
 enum user_layers {
   QWERTY_LAYER,
   NORMAN_LAYER,
@@ -68,8 +69,18 @@ enum user_keycodes {
 
   SEND_MAKE,
   SEND_VERSION,
-  DYNAMIC_MACRO_RANGE
+  DYNAMIC_MACRO_RANGE,
 };
+
+enum user_tapdance {
+  MY_TD_Z_GRV,
+  MY_TD_DOT_LBRC,
+  MY_TD_SLASH_RBRC,
+};
+
+#define TD_ZGRV TD(MY_TD_Z_GRV)
+#define TD_DLBC TD(MY_TD_DOT_LBRC)
+#define TD_SRBC TD(MY_TD_SLASH_RBRC)
 
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)

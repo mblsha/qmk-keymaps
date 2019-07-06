@@ -37,6 +37,8 @@
 // Delay needed for rotary encoder to trigger media keys
 #define TAP_CODE_DELAY 10
 
+#define TAPPING_TERM 200
+
 #define AUDIO_CLICKY
 // This should limit the volume
 // #define DAC_SAMPLE_MAX 65535U

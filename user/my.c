@@ -18,8 +18,6 @@
 #include "my_leader.h"
 #include "dynamic_macro.h"
 
-#define TAPPING_TERM 200
-
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);

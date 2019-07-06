@@ -3,9 +3,11 @@ CONSOLE_ENABLE  = no
 MIDI_ENABLE     = no
 MOUSEKEY_ENABLE = no
 NKRO_ENABLE     = yes
+TAP_DANCE_ENABLE = yes
 
 SRC += my.c
 SRC += my_leader.c
+SRC += my_tapdance.c
 SRC += my_leader_dictionary.c
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
