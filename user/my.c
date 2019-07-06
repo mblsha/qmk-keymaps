@@ -18,6 +18,8 @@
 #include "my_leader.h"
 #include "dynamic_macro.h"
 
+#define TAPPING_TERM 200
+
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
 float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
@@ -52,6 +54,9 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t shift_english_timer;
+  static uint16_t shift_russian_timer;
+
   if (!process_record_dynamic_macro(keycode, record)) {
     return false;
   }
@@ -77,14 +82,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case ENGLISH:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(COLEMAK_LAYER);
+        shift_english_timer = timer_read();
+        register_code(KC_LSHIFT);
+      } else {
+        unregister_code(KC_LSHIFT);
+        if (timer_elapsed(shift_english_timer) < TAPPING_TERM) {
+          layer_off(COLEMAK_RUS_LAYER);
+          layer_on(COLEMAK_ENG_LAYER);
+
+          SEND_STRING(SS_TAP(X_F20));
+        }
       }
-      break;
+      return false;
     case RUSSIAN:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(COLEMAK_RUS_LAYER);
+        shift_russian_timer = timer_read();
+        register_code(KC_LSHIFT);
+      } else {
+        unregister_code(KC_LSHIFT);
+        if (timer_elapsed(shift_russian_timer) < TAPPING_TERM) {
+          layer_off(COLEMAK_ENG_LAYER);
+          layer_on(COLEMAK_RUS_LAYER);
+
+          SEND_STRING(SS_LSFT(SS_TAP(X_F20)));
+        }
       }
-      break;
+      return false;
     case STCH_EX:
       if (record->event.pressed) {
         layer_off(CAMEL_LAYER);
@@ -119,12 +142,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         enable_rgb_without_any_leds_by_default();
       }
-      break;
+      return false;
     case MYRGBDM:
       if (record->event.pressed) {
         rgb_set_brightness_to_zero();
       }
-      break;
+      return false;
     case NPRG_SP:
       if (record->event.pressed) {
         SEND_STRING(", ");

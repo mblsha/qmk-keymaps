@@ -74,11 +74,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [COLEMAK_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
-    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    NPROGRM, KC_DOT,  _______, RUS_SFT,
+    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
-  /* Base layer (Norman)
+  /* English layer (Norman)
+   *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+   *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │     │     │
+   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+   *                 │     │  A  │  S  │  E  │  T  │  G  │  Y  │  N  │  I  │  O  │  H  │     │
+   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+   *                 │ Eng │  Z  │  X  │  C  │  V  │  B  │  P  │  M  │N-Prg│  .  │     │ Rus │
+   *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+   *                 │     │     │     │     │     │     │     │     │     │     │     │     │
+   *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
+   */
+  [COLEMAK_ENG_LAYER] = LAYOUT_planck_grid_wrapper(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    ENG_SFT, _______, _______, _______, _______, _______, _______, _______, NPROGRM, _______, _______, RUS_SFT,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
+
+  /* Russian layer (Norman)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │  ;  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -90,9 +108,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
   [COLEMAK_RUS_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
-    _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
-    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SCLN, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    ENG_SFT, _______, _______, _______, _______, _______, _______, _______, KC_COMM, _______, KC_SLSH, RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
@@ -316,6 +334,7 @@ void rgb_matrix_indicators_user(void) {
   switch (biton32(layer_state)) {
     case QWERTY_LAYER:
     case COLEMAK_LAYER:
+    case COLEMAK_ENG_LAYER:
     case COLEMAK_RUS_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         rgb_matrix_set_color_all(0x00, 0x00, 0x00);
@@ -326,11 +345,15 @@ void rgb_matrix_indicators_user(void) {
   }
 
   switch (biton32(layer_state)) {
-    case COLEMAK_LAYER:
-      mysetcolor(40, 0x88, 0xFF, 0x00);
+    case COLEMAK_ENG_LAYER:
+      if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
+        mysetcolor(40, 0x3A, 0x5F, 0x9F);
+      }
       break;
     case COLEMAK_RUS_LAYER:
-      mysetcolor(42, 0x88, 0xFF, 0x00);
+      if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
+        mysetcolor(42, 0xBB, 0x0A, 0x1E);
+      }
       break;
     case LOWER_LAYER:
       set_planck_spacebar_led(GPIOB, 9);
