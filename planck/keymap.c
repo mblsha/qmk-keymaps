@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  [COLEMAK_LAYER] = LAYOUT_planck_grid_wrapper(
+  [NORMAN_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
     ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  [COLEMAK_ENG_LAYER] = LAYOUT_planck_grid_wrapper(
+  [NORMAN_ENG_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     ENG_SFT, _______, _______, _______, _______, _______, _______, _______, NPROGRM, _______, _______, RUS_SFT,
@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 │     │     │     │     │     │     │     │     │     │     │     │     │
    *                 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
    */
-  [COLEMAK_RUS_LAYER] = LAYOUT_planck_grid_wrapper(
+  [NORMAN_RUS_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SCLN, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     ENG_SFT, _______, _______, _______, _______, _______, _______, _______, KC_COMM, _______, KC_SLSH, RUS_SFT,
@@ -282,7 +282,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *          RGB -- │Qwert│     │     │Mode-│Mode+│Hue -│Hue +│Sat -│Sat +│     │Play1│Rec 1│ -- Record/play macro 1
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *        Audio -- │Colem│Voic-│Voic+│Mus +│Mus -│MIDI+│MIDI-│Aud +│Aud -│     │Play2│Rec 2│ -- Record/play macro 2
+   *        Audio -- │Normn│Voic-│Voic+│Mus +│Mus -│MIDI+│MIDI-│Aud +│Aud -│     │Play2│Rec 2│ -- Record/play macro 2
    *                 ├─────┼─────┼─────┼─────╆━━━━━╅─────┼─────╆━━━━━╅─────┼─────┼─────┼─────┤
    *                 │     │     │Swap │Norm ┃     ┃  Toggle   ┃     ┃Plain│Brig-│Brig+│Stop │ -- Stop recording macro
    *                 └─────┴─────┴─────┴─────┺━━━━━┹─────┴─────┺━━━━━┹─────┴─────┴─────┴─────┘
@@ -291,7 +291,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ADJUST_LAYER] = LAYOUT_planck_grid_wrapper(
     XXXXXXX, RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
-    COLEMAK, MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
+    NORMAN,  MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
     _______,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
@@ -333,9 +333,9 @@ void rgb_matrix_indicators_user(void) {
 
   switch (biton32(layer_state)) {
     case QWERTY_LAYER:
-    case COLEMAK_LAYER:
-    case COLEMAK_ENG_LAYER:
-    case COLEMAK_RUS_LAYER:
+    case NORMAN_LAYER:
+    case NORMAN_ENG_LAYER:
+    case NORMAN_RUS_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         rgb_matrix_set_color_all(0x00, 0x00, 0x00);
       }
@@ -345,12 +345,12 @@ void rgb_matrix_indicators_user(void) {
   }
 
   switch (biton32(layer_state)) {
-    case COLEMAK_ENG_LAYER:
+    case NORMAN_ENG_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         mysetcolor(40, 0x3A, 0x5F, 0x9F);
       }
       break;
-    case COLEMAK_RUS_LAYER:
+    case NORMAN_RUS_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         mysetcolor(42, 0xBB, 0x0A, 0x1E);
       }
@@ -391,7 +391,7 @@ void rgb_matrix_indicators_user(void) {
 
       mysetcolor(1, 0xFF, 0x30, 0x00); // RESET
       mysetcolor(12, 0xFF, 0x30, 0x00); // QWERTY
-      mysetcolor(24, 0xFF, 0x30, 0x00); // COLEMAK
+      mysetcolor(24, 0xFF, 0x30, 0x00); // NORMAN
 
       // Audio
       mysetcolor(3, 0x30, 0xFF, 0x00);

@@ -38,7 +38,7 @@ void rgb_set_brightness_to_zero(void) {
 }
 
 void keyboard_post_init_user() {
-  set_single_persistent_default_layer(COLEMAK_LAYER);
+  set_single_persistent_default_layer(NORMAN_LAYER);
 
   enable_rgb_without_any_leds_by_default();
 }
@@ -75,9 +75,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(QWERTY_LAYER);
       }
       return false;
-    case COLEMAK:
+    case NORMAN:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(COLEMAK_LAYER);
+        set_single_persistent_default_layer(NORMAN_LAYER);
       }
       return false;
     case ENGLISH:
@@ -87,8 +87,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_LSHIFT);
         if (timer_elapsed(shift_english_timer) < TAPPING_TERM) {
-          layer_off(COLEMAK_RUS_LAYER);
-          layer_on(COLEMAK_ENG_LAYER);
+          layer_off(NORMAN_RUS_LAYER);
+          layer_on(NORMAN_ENG_LAYER);
 
           SEND_STRING(SS_TAP(X_F20));
         }
@@ -101,8 +101,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_LSHIFT);
         if (timer_elapsed(shift_russian_timer) < TAPPING_TERM) {
-          layer_off(COLEMAK_ENG_LAYER);
-          layer_on(COLEMAK_RUS_LAYER);
+          layer_off(NORMAN_ENG_LAYER);
+          layer_on(NORMAN_RUS_LAYER);
 
           SEND_STRING(SS_LSFT(SS_TAP(X_F20)));
         }

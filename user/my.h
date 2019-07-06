@@ -25,9 +25,9 @@
 
 enum user_layers {
   QWERTY_LAYER,
-  COLEMAK_LAYER,
-  COLEMAK_ENG_LAYER,
-  COLEMAK_RUS_LAYER,
+  NORMAN_LAYER,
+  NORMAN_ENG_LAYER,
+  NORMAN_RUS_LAYER,
 
   CAMEL_LAYER,
   KEBAB_LAYER,
@@ -48,7 +48,7 @@ enum user_keycodes {
   LEADER = SAFE_RANGE,
 
   QWERTY,
-  COLEMAK,
+  NORMAN,
 
   ENGLISH,
   RUSSIAN,
@@ -135,25 +135,6 @@ enum user_keycodes {
 #define _________________QWERTY_R1_________________ KC_Y,    KC_U,    KC_I,    KC_O,    KC_P
 #define _________________QWERTY_R2_________________ KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN
 #define _________________QWERTY_R3_________________ KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
-
-#define USE_NORMAN
-#if !defined(USE_NORMAN)
-#define _________________COLEMAK_L1________________ KC_Q,    KC_W,    KC_F,    KC_P,    KC_G
-#define _________________COLEMAK_L2________________ KC_A,    KC_R,    KC_S,    KC_T,    KC_D
-#define _________________COLEMAK_L3________________ KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
-
-#define _________________COLEMAK_R1________________ KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN
-#define _________________COLEMAK_R2________________ KC_H,    KC_N,    KC_E,    KC_I,    KC_O
-#define _________________COLEMAK_R3________________ KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
-#else
-// #define _________________NORMAN__L1________________ KC_Q,    KC_W,    KC_D,    KC_F,    KC_K
-// #define _________________NORMAN__L2________________ KC_A,    KC_S,    KC_E,    KC_T,    KC_G
-// #define _________________NORMAN__L3________________ KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
-//
-// #define _________________NORMAN__R1________________ KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN
-// #define _________________NORMAN__R2________________ KC_Y,    KC_N,    KC_I,    KC_O,    KC_H
-// #define _________________NORMAN__R3________________ KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
-#endif
 
 #define _________________LOWER_L1__________________ KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
 #define _________________LOWER_L2__________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5
