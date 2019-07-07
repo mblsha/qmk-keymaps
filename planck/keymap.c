@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
    *                 │     │Ms L │Ms Dn│Ms R │Ms WU│     │     │     │     │     │     │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-   *                 │Shift│     │     │     │     │     │     │     │     │Panel│Windo│Shift│
+   *                 │Shift│N-Wnd│     │     │     │     │     │     │     │Panel│Windo│Shift│
    *                 ┢━━━━━╅─────┼─────┼─────┼─────┼─────┴─────┼─────┼─────┼─────┼─────╆━━━━━┪
    *                 ┃     ┃Play │Prev │Next │Brig-│   Sleep   │Brig+│Mute │Vol- │Vol+ ┃     ┃
    *                 ┗━━━━━┹─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┺━━━━━┛
@@ -212,10 +212,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MYNEXT  KC_F5
 #define MYPREV  KC_F6
 #define MYSLEEP S(KC_F12)
+#define MYNWND  LGUI(KC_GRV)
   [GUI_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_D, XXXXXXX, XXXXXXX, _______, _______,  _______, _______, _______,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, XXXXXXX, XXXXXXX, _______, _______,  _______, _______, _______,
-    KC_LSFT, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,  KC_F10,  KC_F11,  KC_RSFT,
+    KC_LSFT, MYNWND,  _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,  KC_F10,  KC_F11,  KC_RSFT,
     _______, MYPLAY,  MYPREV,  MYNEXT,  KC_BRID, MYSLEEP, MYSLEEP, KC_BRIU, KC_MUTE,  KC_VOLD, KC_VOLU, _______
   ),
 
