@@ -2,3 +2,6 @@
 	path = qmk
 	url = https://github.com/qmk/qmk_firmware
 	ignore = untracked
+[submodule "tmk"]
+	path = tmk
+	url = https://github.com/tmk/tmk_keyboard
