@@ -80,11 +80,13 @@ enum user_tapdance {
   MY_TD_Z_GRV,
   MY_TD_DOT_LBRC,
   MY_TD_SLASH_RBRC,
+  MY_TD_C_QUOT,
 };
 
 #define TD_ZGRV TD(MY_TD_Z_GRV)
 #define TD_DLBC TD(MY_TD_DOT_LBRC)
 #define TD_SRBC TD(MY_TD_SLASH_RBRC)
+#define TD_CQUO TD(MY_TD_C_QUOT)
 
 // Dynamic macros add additional keycodes.
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
