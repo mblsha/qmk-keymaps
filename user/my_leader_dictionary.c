@@ -70,30 +70,6 @@ LEADER_DICT {
     return leader_terminate();
   }
 
-#if 0
-  LEADER(KC_SPC, KC_SPC) {
-    layer_off(CAMEL_LAYER);
-    layer_off(KEBAB_LAYER);
-    layer_off(SNAKE_LAYER);
-    return leader_terminate();
-  }
-
-  LEADER(KC_SPC, KC_C) {
-    layer_on(CAMEL_LAYER);
-    return leader_terminate();
-  }
-
-  LEADER(KC_SPC, KC_K) {
-    layer_on(KEBAB_LAYER);
-    return leader_terminate();
-  }
-
-  LEADER(KC_SPC, KC_S) {
-    layer_on(SNAKE_LAYER);
-    return leader_terminate();
-  }
-#endif
-
 #ifdef PRIVATE_MACROS
   LEADER(KC_D, KC_E) {
     SEND_STRING(PRIVATE_DOMAIN_EMAIL);
