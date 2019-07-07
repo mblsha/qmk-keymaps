@@ -2,10 +2,12 @@ require 'fileutils'
 
 USERNAME  = 'my'
 KEYBOARDS = {
-  'planck'        => ['ez'],
+  'planck' => ['ez'],
 }
 QMK_DIR   = "#{__dir__}/qmk"
 USER_DIR  = "#{QMK_DIR}/users/#{USERNAME}"
+
+TMK_DIR   = "#{__dir__}/tmk"
 
 def keymap_dir(keyboard)
   "#{QMK_DIR}/keyboards/#{keyboard}/keymaps/#{USERNAME}"
@@ -62,8 +64,24 @@ task ci: :install do
       end
     end
   end
+
+  Dir.chdir(TMK_DIR) do
+    Dir.chdir("converter/usb_usb") do
+      sh "make"
+    end
+  end
 end
 
+desc 'Build and install Planck EZ'
 task planck: :ci do
   sh "wally-cli qmk/planck_ez_my.bin"
+end
+
+desc 'Build and install USB-USB Advantage2'
+task advantage: :ci do
+  Dir.chdir(TMK_DIR) do
+    Dir.chdir("converter/usb_usb") do
+      sh "make dfu"
+    end
+  end
 end
