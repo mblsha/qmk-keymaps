@@ -63,3 +63,7 @@ task ci: :install do
     end
   end
 end
+
+task planck: :ci do
+  sh "wally-cli qmk/planck_ez_my.bin"
+end
