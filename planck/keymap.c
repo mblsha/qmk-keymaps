@@ -60,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
-  // TODO: Add mod tap on home row: Ctrl, Shift, Opt, Command, Raise
   /* Base layer (Norman)
+   *                          ⌥     ⌃     ⌘     ⇧                 ⇧     ⌘     ⌃     ⌥
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │     │  Q  │  W  │  D  │  F  │  K  │  J  │  U  │  R  │  L  │  ;  │     │
    *                 ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
@@ -74,6 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [NORMAN_LAYER] = LAYOUT_planck_grid_wrapper(
     _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
+    /* _______, MB_A,    MB_S,    MB_E,    MB_T,    KC_G,    KC_Y,    MB_N,    MB_I,    MB_O,    MB_H,    _______, */
     _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
     ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______

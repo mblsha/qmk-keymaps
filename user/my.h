@@ -94,6 +94,18 @@ enum user_tapdance {
 #define LOWER MO(LOWER_LAYER)
 #define RAISE MO(RAISE_LAYER)
 
+
+// Double-action home row
+#define MB_A MOD_LALT(KC_A)
+#define MB_S MOD_LCTL(KC_S)
+#define MB_E MOD_LGUI(KC_E)
+#define MB_T MOD_LSFT(KC_T)
+#define MB_N MOD_RSFT(KC_N)
+#define MB_I MOD_RGUI(KC_I)
+#define MB_O MOD_RCTL(KC_O)
+#define MB_H MOD_RALT(KC_H)
+
+
 #define GUI_L LT(GUI_LAYER, KC_LBRC)
 #define GUI_R LT(GUI_LAYER, KC_RBRC)
 
