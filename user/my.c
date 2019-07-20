@@ -69,6 +69,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+    case MYNKRO:
+      clear_keyboard(); // clear to prevent stuck keys
+      keymap_config.nkro = !keymap_config.nkro;
+      return false;
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(QWERTY_LAYER);

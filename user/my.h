@@ -43,6 +43,7 @@ enum user_layers {
 
 enum user_keycodes {
   LEADER = SAFE_RANGE,
+  MYNKRO,
 
   QWERTY,
   NORMAN,
