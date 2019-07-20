@@ -25,7 +25,12 @@
 // Play sounds when the default layer is set.
 #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), \
                               SONG(COLEMAK_SOUND) }
-#endif
+
+#define AUDIO_CLICKY
+// This should limit the volume
+// #define DAC_SAMPLE_MAX 65535U
+#define DAC_SAMPLE_MAX 10000U
+#endif  // AUDIO_ENABLE
 
 #define DYNAMIC_MACRO_SIZE 128
 
@@ -39,9 +44,16 @@
 
 #define TAPPING_TERM 300
 
-#define AUDIO_CLICKY
-// This should limit the volume
-// #define DAC_SAMPLE_MAX 65535U
-#define DAC_SAMPLE_MAX 10000U
-
 #undef DEFAULT_PLANCK_EZ_SPACE_LED_CONFIG
+
+// Save some space
+// #define NO_ACTION_MACRO
+// #define NO_ACTION_FUNCTION
+// #define DISABLE_LEADER
+
+// #ifndef NO_DEBUG
+// #define NO_DEBUG
+// #endif // !NO_DEBUG
+// #if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+// #define NO_PRINT
+// #endif // !NO_PRINT

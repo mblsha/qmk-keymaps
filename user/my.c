@@ -24,15 +24,19 @@ float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
 void enable_rgb_without_any_leds_by_default(void) {
+#ifdef RGB_MATRIX_ENABLE
   rgblight_enable();
   rgb_matrix_config.val = UINT8_MAX;
   rgb_matrix_increase_val();
   rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+#endif  // RGB_MATRIX_ENABLE
 }
 
 void rgb_set_brightness_to_zero(void) {
+#ifdef RGB_MATRIX_ENABLE
   rgb_matrix_config.val = 0;
   rgb_matrix_decrease_val();
+#endif  // RGB_MATRIX_ENABLE
 }
 
 void keyboard_post_init_user() {
@@ -60,9 +64,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
   }
 
-  if (!process_leader(keycode, record)) {
-    return false;
-  }
+  /* if (!process_leader(keycode, record)) { */
+  /*   return false; */
+  /* } */
 
   if (!process_record_keymap(keycode, record)) {
     return false;

@@ -3,11 +3,12 @@ require 'fileutils'
 USERNAME  = 'my'
 KEYBOARDS = {
   'planck' => ['ez'],
+  'converter/usb_usb' => [nil],
 }
 QMK_DIR   = "#{__dir__}/qmk"
 USER_DIR  = "#{QMK_DIR}/users/#{USERNAME}"
 
-TMK_DIR   = "#{__dir__}/tmk"
+# TMK_DIR   = "#{__dir__}/tmk"
 
 def keymap_dir(keyboard)
   "#{QMK_DIR}/keyboards/#{keyboard}/keymaps/#{USERNAME}"
@@ -65,11 +66,11 @@ task ci: :install do
     end
   end
 
-  Dir.chdir(TMK_DIR) do
-    Dir.chdir("converter/usb_usb") do
-      sh "make"
-    end
-  end
+  # Dir.chdir(TMK_DIR) do
+  #   Dir.chdir("converter/usb_usb") do
+  #     sh "make"
+  #   end
+  # end
 end
 
 desc 'Build and install Planck EZ'
@@ -79,9 +80,15 @@ end
 
 desc 'Build and install USB-USB Advantage2'
 task advantage: :ci do
-  Dir.chdir(TMK_DIR) do
-    Dir.chdir("converter/usb_usb") do
-      sh "make dfu"
-    end
-  end
+  sh "./dfu-wait.sh atmega32u4"
+  sh "dfu-programmer atmega32u4 erase --force"
+  # sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_default.hex"
+  sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_my.hex"
+  sh "dfu-programmer atmega32u4 reset"
+
+  # Dir.chdir(TMK_DIR) do
+  #   Dir.chdir("converter/usb_usb") do
+  #     sh "make dfu"
+  #   end
+  # end
 end
