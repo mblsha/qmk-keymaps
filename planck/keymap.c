@@ -248,6 +248,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+uint32_t layer_state_set_user(uint32_t state) {
+  return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
+}
+
 #ifdef RGB_MATRIX_ENABLE
 uint8_t rgb_brightness(void) { return rgb_matrix_config.val; }
 

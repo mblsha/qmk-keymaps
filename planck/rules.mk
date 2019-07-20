@@ -1,3 +1,3 @@
-STENO_ENABLE = no
+NKRO_ENABLE     = yes
 # COMBO_ENABLE = yes
 # BACKLIGHT_ENABLE = yes

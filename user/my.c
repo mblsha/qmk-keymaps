@@ -15,8 +15,8 @@
  */
 
 #include "my.h"
-#include "my_leader.h"
-#include "dynamic_macro.h"
+/* #include "my_leader.h" */
+/* #include "dynamic_macro.h" */
 
 #ifdef AUDIO_ENABLE
 float plover_song[][2]    = SONG(PLOVER_SOUND);
@@ -45,10 +45,6 @@ void keyboard_post_init_user() {
   enable_rgb_without_any_leds_by_default();
 }
 
-uint32_t layer_state_set_user(uint32_t state) {
-  return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);
-}
-
 // Redefine process_record_keymap() in keymap definitions.
 __attribute__ ((weak))
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
@@ -60,9 +56,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t shift_russian_timer;
   static uint16_t kShiftTimeout = 150;
 
-  if (!process_record_dynamic_macro(keycode, record)) {
-    return false;
-  }
+  /* if (!process_record_dynamic_macro(keycode, record)) { */
+  /*   return false; */
+  /* } */
 
   /* if (!process_leader(keycode, record)) { */
   /*   return false; */
