@@ -74,12 +74,20 @@ task ci: :install do
 end
 
 desc 'Build and install Planck EZ'
-task planck: :ci do
+task planck: :install do
+  Dir.chdir(QMK_DIR) do
+    sh "make planck/ez:#{USERNAME}"
+  end
+
   sh "wally-cli qmk/planck_ez_my.bin"
 end
 
 desc 'Build and install USB-USB Advantage2'
-task advantage: :ci do
+task advantage: :install do
+  Dir.chdir(QMK_DIR) do
+    sh "make converter/usb_usb:#{USERNAME}"
+  end
+
   sh "./dfu-wait.sh atmega32u4"
   sh "dfu-programmer atmega32u4 erase --force"
   # sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_default.hex"
