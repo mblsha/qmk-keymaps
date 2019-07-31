@@ -1,1 +1,1 @@
-# EXTRAFLAGS        += -flto
+EXTRAFLAGS        += -flto
