@@ -44,7 +44,8 @@
 
 #define TAPPING_TERM 300
 
-#undef DEFAULT_PLANCK_EZ_SPACE_LED_CONFIG
+// We manage the Planck EZ LEDs by ourselves
+#define PLANCK_EZ_CUSTOM_LEDS
 
 // Save some space
 // #define NO_ACTION_MACRO
