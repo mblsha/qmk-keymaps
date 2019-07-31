@@ -70,8 +70,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     case MYNKRO:
-      clear_keyboard(); // clear to prevent stuck keys
+      PLAY_SONG(plover_song);
+      /* if (!eeconfig_is_enabled()) { */
+      /*   eeconfig_init(); */
+      /* } */
+      keymap_config.raw = eeconfig_read_keymap();
       keymap_config.nkro = !keymap_config.nkro;
+      eeconfig_update_keymap(keymap_config.raw);
+      clear_keyboard();  // clear to prevent stuck keys
       return false;
     case QWERTY:
       if (record->event.pressed) {
