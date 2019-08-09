@@ -41,6 +41,7 @@ void rgb_set_brightness_to_zero(void) {
 
 void keyboard_post_init_user() {
   set_single_persistent_default_layer(NORMAN_LAYER);
+  layer_on(NORMAN_ENG_LAYER);
 
   enable_rgb_without_any_leds_by_default();
 }
@@ -69,24 +70,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    case MYNKRO:
-      PLAY_SONG(plover_song);
-      /* if (!eeconfig_is_enabled()) { */
-      /*   eeconfig_init(); */
-      /* } */
-      keymap_config.raw = eeconfig_read_keymap();
-      keymap_config.nkro = !keymap_config.nkro;
-      eeconfig_update_keymap(keymap_config.raw);
-      clear_keyboard();  // clear to prevent stuck keys
+    case GAMEPD:
+      if (record->event.pressed) {
+        layer_on(GAMEPAD_LAYER);
+      }
       return false;
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(QWERTY_LAYER);
+        layer_off(GAMEPAD_LAYER);
+        layer_off(NORMAN_RUS_LAYER);
+        layer_off(NORMAN_ENG_LAYER);
       }
       return false;
     case NORMAN:
       if (record->event.pressed) {
         set_single_persistent_default_layer(NORMAN_LAYER);
+        layer_off(GAMEPAD_LAYER);
+        layer_off(NORMAN_RUS_LAYER);
+        layer_on(NORMAN_ENG_LAYER);
       }
       return false;
     case ENGLISH:

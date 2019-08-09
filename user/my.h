@@ -37,16 +37,17 @@ enum user_layers {
   RAISE_LAYER,
 
   GUI_LAYER,
+  GAMEPAD_LAYER,
 
-  ADJUST_LAYER
+  ADJUST_LAYER,
 };
 
 enum user_keycodes {
   LEADER = SAFE_RANGE,
-  MYNKRO,
 
   QWERTY,
   NORMAN,
+  GAMEPD,
 
   ENGLISH,
   RUSSIAN,

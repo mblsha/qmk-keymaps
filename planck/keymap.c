@@ -40,6 +40,13 @@
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [GAMEPAD_LAYER] = LAYOUT_planck_grid_wrapper(
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
+  ),
+
   /* Base layer (Qwerty)
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
    *                 │  ⇥  │  Q  │  W  │  E  │  R  │  T  │  Y  │  U  │  I  │  O  │  P  │Bspc │
@@ -241,7 +248,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                Swap GUI/Alt _/________/             \_____________\_ Backlight _/
    */
   [ADJUST_LAYER] = LAYOUT_planck_grid_wrapper(
-    MYNKRO,  RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
+    GAMEPD,  RESET,   SEND_MAKE, CK_TOGG,  CK_RST,  CK_UP,   CK_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, SEND_VERSION,    XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,   RGB_RMOD, RGB_MOD, RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, DYN_MACRO_PLAY1, DYN_REC_START1,
     NORMAN,  MUV_DE,  MUV_IN,    MU_ON,    MU_OFF,  MI_ON,   MI_OFF,  AU_ON,   AU_OFF,  XXXXXXX, DYN_MACRO_PLAY2, DYN_REC_START2,
     _______,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
@@ -288,6 +295,7 @@ void rgb_matrix_indicators_user(void) {
   palClearPad(GPIOB, 9);
 
   switch (biton32(layer_state)) {
+    case GAMEPAD_LAYER:
     case QWERTY_LAYER:
     case NORMAN_LAYER:
     case NORMAN_ENG_LAYER:
@@ -301,6 +309,12 @@ void rgb_matrix_indicators_user(void) {
   }
 
   switch (biton32(layer_state)) {
+    case GAMEPAD_LAYER:
+      mysetcolor(2, 0xBB, 0x0A, 0x1E);
+      mysetcolor(13, 0xBB, 0x0A, 0x1E);
+      mysetcolor(14, 0xBB, 0x0A, 0x1E);
+      mysetcolor(15, 0xBB, 0x0A, 0x1E);
+      break;
     case NORMAN_ENG_LAYER:
       if (rgb_matrix_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
         mysetcolor(40, 0x3A, 0x5F, 0x9F);
