@@ -224,8 +224,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MYSCR5  LGUI(LSFT(KC_5))
 #define MYCBSLS LGUI(KC_BSLS)
   [GUI_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_D, XXXXXXX, XXXXXXX, _______, _______,  _______, _______, _______,
-    _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, XXXXXXX, XXXXXXX, _______, _______,  _______, _______, MYCBSLS,
+    _______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_D, XXXXXXX, XXXXXXX, KC_BTN1, KC_WH_U,  KC_WH_D, KC_BTN2, _______,
+    _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, XXXXXXX, XXXXXXX, KC_MS_L, KC_MS_D,  KC_MS_U, KC_MS_R, MYCBSLS,
     KC_LSFT, MYNWND,  _______, _______, MYSCR4,  MYSCR5,  XXXXXXX, _______, _______,  KC_F10,  KC_F11,  KC_RSFT,
     _______, MYPLAY,  MYPREV,  MYNEXT,  KC_BRID, MYSLEEP, MYSLEEP, KC_BRIU, KC_MUTE,  KC_VOLD, KC_VOLU, _______
   ),
@@ -310,6 +310,7 @@ void rgb_matrix_indicators_user(void) {
 
   switch (biton32(layer_state)) {
     case GAMEPAD_LAYER:
+      // WASD
       mysetcolor(2, 0xBB, 0x0A, 0x1E);
       mysetcolor(13, 0xBB, 0x0A, 0x1E);
       mysetcolor(14, 0xBB, 0x0A, 0x1E);
@@ -340,6 +341,28 @@ void rgb_matrix_indicators_user(void) {
       mysetcolor(0, 0xFF, 0x30, 0x00); // STCH_EX
       break;
     case GUI_LAYER:
+#ifdef MOUSEKEY_ENABLE
+      // WASD
+      mysetcolor(2,  0xFF, 0x00, 0x00);
+      mysetcolor(13, 0xFF, 0x00, 0x00);
+      mysetcolor(14, 0xFF, 0x00, 0x00);
+      mysetcolor(15, 0xFF, 0x00, 0x00);
+      // buttons
+      mysetcolor(1, 0xFF, 0xFF, 0xFF);
+      mysetcolor(3, 0xFF, 0xFF, 0xFF);
+      // wheel
+      mysetcolor(4,  0x00, 0xFF, 0x00);
+      mysetcolor(16, 0x00, 0xFF, 0x00);
+
+      // mouse movement
+      for (int i = 19; i <= 22; ++i) mysetcolor(i, 0xFF, 0x00, 0x00);
+      // buttons
+      mysetcolor(7,  0xFF, 0xFF, 0xFF);
+      mysetcolor(10, 0xFF, 0xFF, 0xFF);
+      // wheel
+      mysetcolor(8, 0x00, 0xFF, 0x00);
+      mysetcolor(9, 0x00, 0xFF, 0x00);
+#endif  // MOUSEKEY_ENABLE
       mysetcolor(36, 0xFF, 0xFF, 0xFF); // GUI_L
       mysetcolor(46, 0xFF, 0xFF, 0xFF); // GUI_R
       break;
@@ -359,7 +382,8 @@ void rgb_matrix_indicators_user(void) {
       mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
       mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
 
-      mysetcolor(1, 0xFF, 0x30, 0x00); // RESET
+      mysetcolor(1,  0xFF, 0x30, 0x00); // RESET
+      mysetcolor(0,  0xFF, 0x00, 0x00); // GAMEPAD
       mysetcolor(12, 0xFF, 0x30, 0x00); // QWERTY
       mysetcolor(24, 0xFF, 0x30, 0x00); // NORMAN
 
