@@ -260,7 +260,9 @@ uint32_t layer_state_set_user(uint32_t state) {
 }
 
 #ifdef RGB_MATRIX_ENABLE
-uint8_t rgb_brightness(void) { return rgb_matrix_config.val; }
+uint8_t rgb_brightness(void) {
+  return rgb_matrix_config.hsv.v;
+}
 
 void mysetcolor(int i, uint8_t red, uint8_t green, uint8_t blue) {
   if (rgb_brightness() >= UINT8_MAX || (!red && !green && !blue)) {
@@ -273,10 +275,12 @@ void mysetcolor(int i, uint8_t red, uint8_t green, uint8_t blue) {
   rgb_matrix_set_color(i, frac * red, frac * green, frac * blue);
 }
 
-void set_planck_spacebar_led(stm32_gpio_t *a, int b) {
-  if (!rgb_brightness()) return;
+void myplanck_ez_left_led_on(void) {
+  planck_ez_left_led_level(rgb_brightness());
+}
 
-  palSetPad(a, b);
+void myplanck_ez_right_led_on(void) {
+  planck_ez_right_led_level(rgb_brightness());
 }
 
 /* |----+----+----+----+----+----+----+----+----+----+----+----|
@@ -290,9 +294,8 @@ void set_planck_spacebar_led(stm32_gpio_t *a, int b) {
  * |----+----+----+----+----+----+----+----+----+----+----+----|
  */
 void rgb_matrix_indicators_user(void) {
-  // Clear the space bar LEDs.
-  palClearPad(GPIOB, 8);
-  palClearPad(GPIOB, 9);
+  planck_ez_left_led_off();
+  planck_ez_right_led_off();
 
   switch (biton32(layer_state)) {
     case GAMEPAD_LAYER:
@@ -327,7 +330,7 @@ void rgb_matrix_indicators_user(void) {
       }
       break;
     case LOWER_LAYER:
-      set_planck_spacebar_led(GPIOB, 9);
+      myplanck_ez_left_led_on();
       mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
       for (int i = 13; i <= 16; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
       for (int i = 25; i <= 28; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
@@ -336,7 +339,7 @@ void rgb_matrix_indicators_user(void) {
       for (int i = 31; i <= 34; ++i) mysetcolor(i, 0xFF, 0xFF, 0xFF);
       break;
     case RAISE_LAYER:
-      set_planck_spacebar_led(GPIOB, 8);
+      myplanck_ez_right_led_on();
       mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
       mysetcolor(0, 0xFF, 0x30, 0x00); // STCH_EX
       break;
@@ -377,8 +380,8 @@ void rgb_matrix_indicators_user(void) {
       }
       break;
     case ADJUST_LAYER:
-      set_planck_spacebar_led(GPIOB, 8);
-      set_planck_spacebar_led(GPIOB, 9);
+      myplanck_ez_left_led_on();
+      myplanck_ez_right_led_on();
       mysetcolor(40, 0xFF, 0xFF, 0xFF); // LOWER
       mysetcolor(42, 0xFF, 0xFF, 0xFF); // RAISE
 

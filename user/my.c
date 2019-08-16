@@ -26,7 +26,7 @@ float plover_gb_song[][2] = SONG(PLOVER_GOODBYE_SOUND);
 void enable_rgb_without_any_leds_by_default(void) {
 #ifdef RGB_MATRIX_ENABLE
   rgblight_enable();
-  rgb_matrix_config.val = UINT8_MAX;
+  rgb_matrix_config.hsv.v = UINT8_MAX;
   rgb_matrix_increase_val();
   rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
 #endif  // RGB_MATRIX_ENABLE
@@ -34,7 +34,7 @@ void enable_rgb_without_any_leds_by_default(void) {
 
 void rgb_set_brightness_to_zero(void) {
 #ifdef RGB_MATRIX_ENABLE
-  rgb_matrix_config.val = 0;
+  rgb_matrix_config.hsv.v = 0;
   rgb_matrix_decrease_val();
 #endif  // RGB_MATRIX_ENABLE
 }
