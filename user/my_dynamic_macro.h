@@ -16,6 +16,7 @@
 
 #pragma once
 
+#if 0
 // This is a hack to allow dynamic macros in user space. QMK's implementation
 // is in the header file, so it can't be included more than once, even though
 // both this file and the keymap file need to include it. The keymap only needs
@@ -27,4 +28,4 @@ enum dynamic_macro_keycodes_keymap {
   DYN_MACRO_PLAY1,
   DYN_MACRO_PLAY2,
 };
-
+#endif
