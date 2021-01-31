@@ -1,66 +1,195 @@
+#include QMK_KEYBOARD_H
+#include "my.h"
+#include "my_dynamic_macro.h"
+
+// clang-format off
 /*
-Copyright 2017 Balz Guenat <balz.guenat@gmail.com>
+LAYOUT_all from keyboards/converter/usb_usb/usb_usb.h:
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
+        K68,K69,K6A,K6B,K6C,K6D,K6E,K6F,K70,K71,K72,K73,
+        F13 F14 F15 F16 F17 F18 F19 F20 F21 F22 F23 F24
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+K29,    K3A,K3B,K3C,K3D,K3E,K3F,K40,K41,K42,K43,K44,K45,      K46,K47,K48,  K81,K80,K7F,K66, K75,
+ESC     F1  F2  F3  F4  F5  F6  F7  F8  F9  F10 F11 F12       PrS ScL Pau   VDn VUp Mut Pwr  Help
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+K35,K1E,K1F,K20,K21,K22,K23,K24,K25,K26,K27,K2D,K2E,K89,K2A,  K49,K4A,K4B,  K53,K54,K55,K56, K78,K79,
+`   1   2   3   4   5   6   7   8   9   0   -   =   JPY Bsp   Ins Hom PgU   NmL /   *   -    Stp Agn
+
+K2B,K14,K1A,K08,K15,K17,K1C,K18,K0C,K12,K13,K2F,K30,    K31,  K4C,K4D,K4E,  K5F,K60,K61,K57, K76,K7A,
+Tab Q   W   E   R   T   Y   U   I   O   P   [   ]       \     Del End PgD   7   8   9   +    Mnu Und
+
+K39,K04,K16,K07,K09,K0A,K0B,K0D,K0E,K0F,K33,K34,    K32,K28,                K5C,K5D,K5E,K85, K77,K7C,
+CpL A   S   D   F   G   H   J   K   L   ;   '       #   Retn                4   5   6   KP,  Sel Cpy
+
+KE1,K64,K1D,K1B,K06,K19,K05,K11,K10,K36,K37,K38,    K87,KE5,      K52,      K59,K5A,K5B,K67, K74,K7D,
+ShL XXX Z   X   C   V   B   N   M   ,   ,   /       RO  ShR       Up        1   2   3   KP=  Exe Pst
+
+KE0,KE3,KE2,K8B,K91,    K2C,    K90,K8A,K88,KE6,KE7,K65,KE4,  K50,K51,K4F,  K62,    K63,K58, K7E,K7B
+Ctl Gui Alt MHEN HNJ   Space    H/E HEN KAN Alt Gui App Ctl   Lef Dow Rig   0       .   Ent  Fnd Cut
+
+
+NB:
+* q_qwerty.txt needs to be activated in Advantage2 in order for these keymaps to
+  work.
+* usb_usb converter doesn't support media keys input.
+
+F13 F14 F15 (Pedals)
+
+ESC F1  F2  F3  F4  F5  F6  F7  F8
+F9  F10 F11 F12 PrScrn ScrLock Pause
+
+=   1   2   3   4   5   6   7   8   9   0   -
+Tab Q   W   E   R   T   Y   U   I   O   P   \
+F16 A   S   D   F   G   H   J   K   L   ;   '
+ShL Z   X   C   V   B   N   M   ,   .   /   ShR
+    `   F17 ←   →           ↑   ↓   [   ]
+
+    CtL AlL     WnR CtR
+        Hom     PgU
+Bsp Del End     PgD Ent Spc
 */
 
-#include QMK_KEYBOARD_H
+#define LAYOUT_advantage2_wrapper(...) LAYOUT_advantage2(__VA_ARGS__)
 
-const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
-    /* 0: plain Qwerty without layer switching
-     *         ,---------------. ,---------------. ,---------------.
-     *         |F13|F14|F15|F16| |F17|F18|F19|F20| |F21|F22|F23|F24|
-     * ,---.   |---------------| |---------------| |---------------| ,-----------. ,---------------. ,-------.
-     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau| |VDn|VUp|Mut|Pwr| | Help  |
-     * `---'   `---------------' `---------------' `---------------' `-----------' `---------------' `-------'
-     * ,-----------------------------------------------------------. ,-----------. ,---------------. ,-------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|JPY|Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -| |Stp|Agn|
-     * |-----------------------------------------------------------| |-----------| |---------------| |-------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +| |Mnu|Und|
-     * |-----------------------------------------------------------| `-----------' |---------------| |-------|
-     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  :|  #|Retn|               |  4|  5|  6|KP,| |Sel|Cpy|
-     * |-----------------------------------------------------------|     ,---.     |---------------| |-------|
-     * |Shft|  <|  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /| RO|Shift |     |Up |     |  1|  2|  3|KP=| |Exe|Pst|
-     * |-----------------------------------------------------------| ,-----------. |---------------| |-------|
-     * |Ctl|Gui|Alt|MHEN|HNJ| Space  |H/E|HENK|KANA|Alt|Gui|App|Ctl| |Lef|Dow|Rig| |  0    |  .|Ent| |Fnd|Cut|
-     * `-----------------------------------------------------------' `-----------' `---------------' `-------'
-     */
-    [0] = LAYOUT_all(
-                      KC_F13,  KC_F14,  KC_F15,  KC_F16, KC_F17, KC_F18, KC_F19,  KC_F20,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
-    KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,  KC_F6,  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,               KC_PSCR, KC_SLCK, KC_PAUS,    KC_VOLD, KC_VOLU, KC_MUTE, KC_PWR,     KC_HELP,
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_JYEN, KC_BSPC,     KC_INS,  KC_HOME, KC_PGUP,    KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS,    KC_STOP, KC_AGIN,
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,          KC_BSLS,     KC_DEL,  KC_END,  KC_PGDN,    KC_P7,   KC_P8,   KC_P9,   KC_PPLS,    KC_MENU, KC_UNDO,
-    KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_NUHS, KC_ENT,                                    KC_P4,   KC_P5,   KC_P6,   KC_PCMM,    KC_SLCT, KC_COPY,
-    KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RO,   KC_RSFT,              KC_UP,               KC_P1,   KC_P2,   KC_P3,   KC_PEQL,    KC_EXEC, KC_PSTE,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_MHEN, KC_HANJ,         KC_SPC,         KC_HAEN, KC_HENK, KC_KANA, KC_RALT, KC_RGUI, KC_APP,  KC_RCTL,     KC_LEFT, KC_DOWN, KC_RGHT,    KC_P0,            KC_PDOT, KC_PENT,    KC_FIND, KC_CUT
-    ),
-    [1] = LAYOUT_all(
-                      ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______, ______, ______,
-    ______,           ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______, ______, ______,             ______,______,______,    ______,______,______,______,    ______,
-    ______,  ______,  ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______, ______, ______, ______,     ______,______,______,    ______,______,______,______,    ______,______,
-    ______,  ______,  ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______, ______,         ______,     ______,______,______,    ______,______,______,______,    ______,______,
-    ______,  ______,  ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______,         ______, ______,                              ______,______,______,______,    ______,______,
-    ______,  ______,  ______,  ______,  ______, ______, ______,  ______,  ______, ______,  ______, ______,         ______, ______,            ______,           ______,______,______,______,    ______,______,
-    ______,  ______,  ______,  ______,  ______,         ______,           ______, ______,  ______, ______, ______, ______, ______,     ______,______,______,    ______,       ______,______,    ______,______
-    ),
+#define LAYOUT_advantage2( \
+    K68,K69,K6A, \
+    \
+    K29,K3A,K3B,K3C,K3D,K3E,K3F,K40,K41, \
+            K42,K43,K44,K45,K46,K47,K48, \
+    \
+    K2E,K1E,K1F,K20,K21,K22,K23,K24,K25,K26,K27,K2D, \
+    K2B,K14,K1A,K08,K15,K17,K1C,K18,K0C,K12,K13,K31, \
+    K6B,K04,K16,K07,K09,K0A,K0B,K0D,K0E,K0F,K33,K34, \
+    KE1,K1D,K1B,K06,K19,K05,K11,K10,K36,K37,K38,KE5, \
+        K35,K6C,K50,K4F,        K52,K51,K2F,F30,     \
+    \
+        KE0,KE2,    KE7,KE4,    \
+            K4A,    K4B,        \
+    K2A,K4C,K4D,    K4E,K28,K2C \
+) LAYOUT_all( \
+           K68,K69,K6A,K6B,K6C,  0,  0,  0,  0,  0,  0,  0,                                              \
+   K29,    K3A,K3B,K3C,K3D,K3E,K3F,K40,K41,K42,K43,K44,K45,      K46,K47,K48,    0,  0,  0,  0,   0,     \
+   K35,K1E,K1F,K20,K21,K22,K23,K24,K25,K26,K27,K2D,K2E,  0,K2A,    0,K4A,K4B,    0,  0,  0,  0,   0,  0, \
+   K2B,K14,K1A,K08,K15,K17,K1C,K18,K0C,K12,K13,K2F,  0,    K31,  K4C,K4D,K4E,    0,  0,  0,  0,   0,  0, \
+     0,K04,K16,K07,K09,K0A,K0B,K0D,K0E,K0F,K33,K34,      0,K28,                  0,  0,  0,  0,   0,  0, \
+   KE1,  0,K1D,K1B,K06,K19,K05,K11,K10,K36,K37,K38,      0,KE5,      K52,        0,  0,  0,  0,   0,  0, \
+   KE0,  0,KE2,  0,  0,    K2C,      0,  0,  0,  0,KE7,  0,KE4,  K50,K51,K4F,    0,      0,  0,   0,  0  \
+)
+
+/*
+           K68,K69,K6A,K6B,K6C,K6D,K6E,K6F,K70,K71,K72,K73,
+   K29,    K3A,K3B,K3C,K3D,K3E,K3F,K40,K41,K42,K43,K44,K45,      K46,K47,K48,  K81,K80,K7F,K66, K75,
+   K35,K1E,K1F,K20,K21,K22,K23,K24,K25,K26,K27,K2D,K2E,K89,K2A,  K49,K4A,K4B,  K53,K54,K55,K56, K78,K79,
+   K2B,K14,K1A,K08,K15,K17,K1C,K18,K0C,K12,K13,K2F,K30,    K31,  K4C,K4D,K4E,  K5F,K60,K61,K57, K76,K7A,
+   K39,K04,K16,K07,K09,K0A,K0B,K0D,K0E,K0F,K33,K34,    K32,K28,                K5C,K5D,K5E,K85, K77,K7C,
+   KE1,K64,K1D,K1B,K06,K19,K05,K11,K10,K36,K37,K38,    K87,KE5,      K52,      K59,K5A,K5B,K67, K74,K7D,
+   KE0,KE3,KE2,K8B,K91,    K2C,    K90,K8A,K88,KE6,KE7,K65,KE4,  K50,K51,K4F,  K62,    K63,K58, K7E,K7B
+*/
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [QWERTY_LAYER] = LAYOUT_advantage2_wrapper(
+    _________PEDALS__________
+
+    __________________________FUNCTION_L___________________________________________
+    __________________________FUNCTION_R___________________________________________
+
+    KC_EQL,  _________________NUMBERS_L_________________ _________________NUMBERS_R_________________  KC_MINS,
+    KC_TAB,  _________________QWERTY_L1_________________ _________________QWERTY_R1_________________  KC_BSLS,
+    KC_CAPS, _________________QWERTY_L2_________________ _________________QWERTY_R2_________________  KC_QUOT,
+    KC_LSFT, _________________QWERTY_L3_________________ _________________QWERTY_R3_________________  KC_RSFT,
+             KC_GRV,  KC_ESC,  KC_LEFT, KC_RIGHT,                 KC_UP,   KC_DOWN, KC_LBRC, KC_RBRC,
+
+             KC_LCTL, KC_LALT,          KC_RGUI, KC_RCTRL,
+                      KC_HOME,          KC_PGUP,
+    KC_BSPC, KC_DEL,  KC_END,           KC_PGDN, KC_ENT,  KC_SPC
+  ),
+
+  [NORMAN_LAYER] = LAYOUT_advantage2_wrapper(
+    _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    KC_TAB,  _________________NORMAN_L1_________________  _________________NORMAN_R1_________________  KC_BSPC,
+    CTL_ESC, _________________NORMAN_L2_________________  _________________NORMAN_R2_________________  CTL_ENT,
+    ENG_SFT, _________________NORMAN_L3_________________  _________________NORMAN_R3_________________  RUS_SFT,
+             _______, _______, _______, _______,                   _______, _______, _______, _______,
+
+             KC_LALT, KC_LGUI,          KC_RGUI, KC_RALT,
+                      _______,          _______,
+    KC_SPC, KC_BSPC,  _______,          _______, _______, KC_RCTRL
+  ),
+
+#if defined(ENABLE_NORMAN_ENGRUS)
+  [NORMAN_ENG_LAYER] = LAYOUT_advantage2_wrapper(
+    _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    ENG_SFT, _______, _______, _______, _______, _______, _______, _______, NPRG_CM, _______, _______, RUS_SFT,
+             _______, _______, _______, _______,                   _______, _______, _______, _______,
+
+             _______, _______,          _______, _______,
+                      _______,          _______,
+    _______, _______, _______,          _______, _______, _______
+  ),
+
+  /* TODO: Do a reverse layout so the Cmd+Keys will work the same as in the english layout */
+  [NORMAN_RUS_LAYER] = LAYOUT_advantage2_wrapper(
+    _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    ENG_SFT, _______, _______, _______, _______, _______, _______, _______, KC_COMM, _______, _______, RUS_SFT,
+             _______, _______, _______, _______,                   _______, _______, _______, _______,
+
+             _______, _______,          _______, _______,
+                      _______,          _______,
+    _______, _______, _______,          _______, _______, _______
+  ),
+#endif // defined(ENABLE_NORMAN_ENGRUS)
+
+  [NORMAL_PROGRAMMING_LAYER] = LAYOUT_advantage2_wrapper(
+    SPROGRM, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _________________PROG___L1_________________  _________________PROG___R1_________________  _______,
+    STCH_EX, _________________PROG___L2_________________  _________________PROG___R2_________________  _______,
+    SPROGRM, _________________PROG___L3_________________  _________________PROG___R3_________________  SPROGRM,
+             _______, _______, _______, _______,                   _______, _______, _______, _______,
+
+             _______, _______,          _______, _______,
+                      _______,          _______,
+    NPRG_SP, _______, _______,          _______, _______, _______
+  ),
+
+  [SHIFT_PROGRAMMING_LAYER] = LAYOUT_advantage2_wrapper(
+    NPROGRM, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                      _______, _______, _______, _______, _______, _______, _______,
+
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _________________S_PROG_L1_________________  _________________S_PROG_R1_________________  _______,
+    STCH_EX, _________________S_PROG_L2_________________  _________________S_PROG_R2_________________  _______,
+    NPROGRM, _________________S_PROG_L3_________________  _________________S_PROG_R3_________________  NPROGRM,
+             _______, _______, _______, _______,                   _______, _______, _______, _______,
+
+             _______, _______,          _______, _______,
+                      _______,          _______,
+    NPRG_SP, _______, _______,          _______, _______, _______
+  ),
 };
-
-void matrix_init_user(void) {
-}
-
-void matrix_scan_user(void) {
-}
-
-void led_set_user(uint8_t usb_led) {
-}
+// clang-format on

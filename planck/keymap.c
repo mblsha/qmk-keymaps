@@ -18,6 +18,7 @@
 #include "my.h"
 #include "my_dynamic_macro.h"
 
+// clang-format off
 #if 0
   /* Shift-Numeric layer
    *                 ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -41,10 +42,10 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [GAMEPAD_LAYER] = LAYOUT_planck_grid_wrapper(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_F1,   KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, KC_RCTL, KC_F12
+    KC_TAB,  _________________QWERTY_L1_________________ _________________QWERTY_R1_________________  KC_BSPC,
+    KC_ESC,  _________________QWERTY_L2_________________ _________________QWERTY_R2_________________  KC_ENT,
+    KC_LSFT, _________________QWERTY_L3_________________ _________________QWERTY_R3_________________  KC_RSFT,
+    KC_F1,   KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC, KC_SPC,  RAISE,   KC_RGUI, KC_RALT, KC_RCTL, KC_F12
   ),
 
   /* Base layer (Qwerty)
@@ -61,10 +62,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *    Tap for ] [ --------'-----------------------------------------------------'
    */
   [QWERTY_LAYER] = LAYOUT_planck_grid_wrapper(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, CTL_ENT,
-    KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,
-    GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
+    KC_TAB,  _________________QWERTY_L1_________________ _________________QWERTY_R1_________________  KC_BSPC,
+    CTL_ESC, _________________QWERTY_L2_________________ _________________QWERTY_R2_________________  CTL_ENT,
+    KC_LSPO, _________________QWERTY_L3_________________ _________________QWERTY_R3_________________  KC_RSPC,
+    GUI_L,   HYPER_L, KC_LALT, KC_LGUI, LOWER,   KC_SPC, KC_SPC,  RAISE,   KC_RGUI, KC_RALT, HYPER_R, GUI_R
   ),
 
   /* Base layer (Norman)
@@ -80,10 +81,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
    */
   [NORMAN_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,    KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN, _______,
-    /* _______, MB_A,    MB_S,    MB_E,    MB_T,    KC_G,    KC_Y,    MB_N,    MB_I,    MB_O,    MB_H,    _______, */
-    _______, KC_A,    KC_S,    KC_E,    KC_T,    KC_G,    KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,    _______,
-    ENG_SFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RUS_SFT,
+    _______, _________________NORMAN_L1_________________  _________________NORMAN_R1_________________  _______,
+    _______, _________________NORMAN_L2_________________  _________________NORMAN_R2_________________  _______,
+    ENG_SFT, _________________NORMAN_L3_________________  _________________NORMAN_R3_________________  RUS_SFT,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
@@ -135,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
    */
   [NORMAL_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,   KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM, _______,
-    STCH_EX, KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR, KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS, _______,
-    SPROGRM, KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE, KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______, SPROGRM,
+    _______, _________________PROG___L1_________________  _________________PROG___R1_________________  _______,
+    STCH_EX, _________________PROG___L2_________________  _________________PROG___R2_________________  _______,
+    SPROGRM, _________________PROG___L3_________________  _________________PROG___R3_________________  SPROGRM,
     _______, _______, _______, _______, _______, NPRG_SP, NPRG_SP, _______, _______, _______, _______, _______
   ),
 
@@ -154,9 +154,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
    */
   [SHIFT_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
-    _______, _______, SPRG_H1, _______, SPRG_H3, SPRG_H4, _______, _______, SPRG_H7, SPRG_H8, SPRG_H9, _______,
-    STCH_EX, SPRG_M0, SPRG_M1, SPRG_M2, _______, SPRG_M4, _______, SPRG_M6, _______, _______, SPRG_M9, _______,
-    NPROGRM, _______, _______, _______, _______, SPRG_L4, _______, _______, SPRG_L7, SPRG_L8, _______, NPROGRM,
+    _______, _________________S_PROG_L1_________________  _________________S_PROG_R1_________________  _______,
+    STCH_EX, _________________S_PROG_L2_________________  _________________S_PROG_R2_________________  _______,
+    NPROGRM, _________________S_PROG_L3_________________  _________________S_PROG_R3_________________  NPROGRM,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [RAISE_LAYER] = LAYOUT_planck_grid_wrapper(
     STCH_EX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+    KC_EQL,  _________________NUMBERS_L_________________  _________________NUMBERS_R_________________  KC_MINS,
     KC_LSFT, KC_GRV,  _______, _______, _______, _______, _______, _______, _______, _______, KC_SCLN, KC_RSFT,
     _______, KC_LCTL, KC_LALT, KC_LGUI, _______, _______, _______, _______, KC_RGUI, KC_RALT, KC_RCTL, _______
   ),
@@ -254,6 +254,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,   XXXXXXX, AG_SWAP,   AG_NORM,  LOWER,   MYRGB,   MYRGB,   RAISE,   MYRGBDM, LIT_DEC, LIT_INC,         DYN_REC_STOP
   )
 };
+// clang-format off
 
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, LOWER_LAYER, RAISE_LAYER, ADJUST_LAYER);

@@ -1,0 +1,7 @@
+* QMK layout for use with Hasu usb_usb converter
+*
+[lp-tab]>[F13]
+[mp-kpshf]>[F14]
+[rp-kpent]>[F15]
+[caps]>[F16]
+[intl-\]>[F17]

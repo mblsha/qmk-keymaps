@@ -85,14 +85,19 @@ end
 desc 'Build and install USB-USB Advantage2'
 task advantage: :install do
   Dir.chdir(QMK_DIR) do
-    sh "make converter/usb_usb:#{USERNAME}"
+    # sh "make converter/usb_usb:#{USERNAME}"
+    # minsha ~/src/qmk-keymaps/qmk> set -x PATH /usr/local/opt/avr-gcc@8/bin $PATH
+    # sh "PATH=/usr/local/opt/avr-gcc@8/bin:$PATH qmk compile -kb converter/usb_usb/hasu -km chriskopher"
+    # sh "PATH=/usr/local/opt/avr-gcc@8/bin:$PATH qmk compile -kb converter/usb_usb/hasu -km my"
+    sh "PATH=/usr/local/opt/avr-gcc@8/bin:$PATH qmk flash -kb converter/usb_usb/hasu -km my"
   end
 
-  sh "./dfu-wait.sh atmega32u4"
-  sh "dfu-programmer atmega32u4 erase --force"
-  # sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_default.hex"
-  sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_my.hex"
-  sh "dfu-programmer atmega32u4 reset"
+  # qmk flash seems to work well enough.
+  # sh "./dfu-wait.sh atmega32u4"
+  # sh "dfu-programmer atmega32u4 erase --force"
+  # # sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_default.hex"
+  # sh "dfu-programmer atmega32u4 flash qmk/converter_usb_usb_hasu_my.hex"
+  # sh "dfu-programmer atmega32u4 reset"
 
   # Dir.chdir(TMK_DIR) do
   #   Dir.chdir("converter/usb_usb") do

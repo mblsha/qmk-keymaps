@@ -21,14 +21,20 @@
 
 #ifdef RGB_MATRIX_ENABLE
 #include "rgb_matrix.h"
-#endif
+#endif  // RGB_MATRIX_ENABLE
+
+// #define ENABLE_GAMEPAD
+#define ENABLE_NORMAN_ENGRUS
 
 // Limit of 15 layers in total.
 enum user_layers {
   QWERTY_LAYER,
   NORMAN_LAYER,
+
+#if defined(ENABLE_NORMAN_ENGRUS)
   NORMAN_ENG_LAYER,
   NORMAN_RUS_LAYER,
+#endif  // defined(ENABLE_NORMAN_ENGRUS)
 
   NORMAL_PROGRAMMING_LAYER,
   SHIFT_PROGRAMMING_LAYER,
@@ -37,7 +43,9 @@ enum user_layers {
   RAISE_LAYER,
 
   GUI_LAYER,
+#if defined(ENABLE_GAMEPAD)
   GAMEPAD_LAYER,
+#endif  // ENABLE_GAMEPAD
 
   ADJUST_LAYER,
 };
@@ -47,10 +55,14 @@ enum user_keycodes {
 
   QWERTY,
   NORMAN,
+#if defined(ENABLE_GAMEPAD)
   GAMEPD,
+#endif  // ENABLE_GAMEPAD
 
+#if defined(ENABLE_NORMAN_ENGRUS)
   ENGLISH,
   RUSSIAN,
+#endif  // defined(ENABLE_NORMAN_ENGRUS)
 
   STCH_EX,
 
@@ -59,13 +71,32 @@ enum user_keycodes {
   NPRG_CM,
 
   NPRG_SP,
-  SPRG_H1, SPRG_H3, SPRG_H4, SPRG_H7, SPRG_H8, SPRG_H9,
-  SPRG_M0, SPRG_M1, SPRG_M2, SPRG_M4, SPRG_M6, SPRG_M9,
-  SPRG_L4, SPRG_L7, SPRG_L8,
+  SPRG_H1,
+  SPRG_H3,
+  SPRG_H4,
+  SPRG_H7,
+  SPRG_H8,
+  SPRG_H9,
+  SPRG_M0,
+  SPRG_M1,
+  SPRG_M2,
+  SPRG_M4,
+  SPRG_M6,
+  SPRG_M9,
+  SPRG_L4,
+  SPRG_L7,
+  SPRG_L8,
 
+#ifndef NO_DEBUG
+  // Print current layer info. Mapping it to F1 is not a bad idea.
+  MBL_LYR,
+#endif  // !NO_DEBUG
+
+#ifdef RGB_MATRIX_ENABLE
   // Enable RGB, disable all animations.
   MYRGB,
-  MYRGBDM, // dim leds
+  MYRGBDM,  // dim leds
+#endif      // RGB_MATRIX_ENABLE
 
   SEND_MAKE,
   SEND_VERSION,
@@ -90,12 +121,16 @@ enum user_tapdance {
 #define NPROGRM OSL(NORMAL_PROGRAMMING_LAYER)
 #define SPROGRM OSL(SHIFT_PROGRAMMING_LAYER)
 
+#if defined(ENABLE_NORMAN_ENGRUS)
 #define ENG_SFT (ENGLISH)
 #define RUS_SFT (RUSSIAN)
+#else
+#define ENG_SFT (KC_LSFT)
+#define RUS_SFT (KC_RSFT)
+#endif  // defined(ENABLE_NORMAN_ENGRUS)
 
 #define LOWER MO(LOWER_LAYER)
 #define RAISE MO(RAISE_LAYER)
-
 
 // Double-action home row
 #define MB_A MOD_LALT(KC_A)
@@ -106,7 +141,6 @@ enum user_tapdance {
 #define MB_I MOD_RGUI(KC_I)
 #define MB_O MOD_RCTL(KC_O)
 #define MB_H MOD_RALT(KC_H)
-
 
 #define GUI_L LT(GUI_LAYER, KC_LBRC)
 #define GUI_R LT(GUI_LAYER, KC_RBRC)
@@ -129,14 +163,14 @@ enum user_tapdance {
 #define WM_FULL LALT(LGUI(KC_F))
 #define WM_NEXT LCTL(LALT(LGUI(KC_RGHT)))
 #define WM_PREV LCTL(LALT(LGUI(KC_LEFT)))
-#define WM_NW   LCTL(LGUI(KC_LEFT))
-#define WM_N    LALT(LGUI(KC_UP))
-#define WM_NE   LCTL(LGUI(KC_RGHT))
-#define WM_E    LALT(LGUI(KC_RGHT))
-#define WM_SE   S(LCTL(LGUI(KC_RGHT)))
-#define WM_S    LALT(LGUI(KC_DOWN))
-#define WM_SW   S(LCTL(LGUI(KC_LEFT)))
-#define WM_W    LALT(LGUI(KC_LEFT))
+#define WM_NW LCTL(LGUI(KC_LEFT))
+#define WM_N LALT(LGUI(KC_UP))
+#define WM_NE LCTL(LGUI(KC_RGHT))
+#define WM_E LALT(LGUI(KC_RGHT))
+#define WM_SE S(LCTL(LGUI(KC_RGHT)))
+#define WM_S LALT(LGUI(KC_DOWN))
+#define WM_SW S(LCTL(LGUI(KC_LEFT)))
+#define WM_W LALT(LGUI(KC_LEFT))
 #define WM_CNTR LALT(LGUI(KC_C))
 
 // Unify backlight controls
@@ -148,13 +182,57 @@ enum user_tapdance {
 #define LIT_TOG BL_TOGG
 #define LIT_DEC BL_DEC
 #define LIT_INC BL_INC
-#endif
+#endif  // defined(RGB_MATRIX_ENABLE)
 
 // Alias layout macros that expand groups of keys.
 #define LAYOUT_planck_grid_wrapper(...) LAYOUT_planck_grid(__VA_ARGS__)
 #define LAYOUT_planck_mit_wrapper(...) LAYOUT_planck_mit(__VA_ARGS__)
 #define LAYOUT_preonic_grid_wrapper(...) LAYOUT_preonic_grid(__VA_ARGS__)
 
+// clang-format off
+#define _________________QWERTY_L1_________________ KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
+#define _________________QWERTY_L2_________________ KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
+#define _________________QWERTY_L3_________________ KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,
+
+#define _________________QWERTY_R1_________________ KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
+#define _________________QWERTY_R2_________________ KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,
+#define _________________QWERTY_R3_________________ KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
+
+#define _________________NORMAN_L1_________________ KC_Q,    KC_W,    KC_D,    KC_F,    KC_K,
+#define _________________NORMAN_L2_________________ KC_A,    KC_S,    KC_E,    KC_T,    KC_G,
+#define _________________NORMAN_L3_________________ KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,
+
+#define _________________NORMAN_R1_________________ KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN,
+#define _________________NORMAN_R2_________________ KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,
+#define _________________NORMAN_R3_________________ KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
+
+#define _________________PROG___L1_________________ KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,
+#define _________________PROG___L2_________________ KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR,
+#define _________________PROG___L3_________________ KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE,
+
+#define _________________PROG___R1_________________ KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM,
+#define _________________PROG___R2_________________ KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS,
+#define _________________PROG___R3_________________ KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______,
+
+#define _________________S_PROG_L1_________________ _______, SPRG_H1, _______, SPRG_H3, SPRG_H4,
+#define _________________S_PROG_L2_________________ SPRG_M0, SPRG_M1, SPRG_M2, _______, SPRG_M4,
+#define _________________S_PROG_L3_________________ _______, _______, _______, _______, SPRG_L4,
+
+#define _________________S_PROG_R1_________________ _______, _______, SPRG_H7, SPRG_H8, SPRG_H9,
+#define _________________S_PROG_R2_________________ _______, SPRG_M6, _______, _______, SPRG_M9,
+#define _________________S_PROG_R3_________________ _______, _______, SPRG_L7, SPRG_L8, _______,
+
+#define _________PEDALS__________ KC_LSFT, KC_LCTL, KC_LGUI,
+
+#define __________________________FUNCTION_L___________________________________________ \
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_F6,    KC_F7,   KC_F8,
+#define __________________________FUNCTION_R___________________________________________ \
+        KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_MUTE,  KC_VOLD, KC_VOLU,
+
+#define _________________NUMBERS_L_________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
+#define _________________NUMBERS_R_________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+
+#if 0
 #define _________________QWERTY_L1_________________ KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
 #define _________________QWERTY_L2_________________ KC_A,    KC_S,    KC_D,    KC_F,    KC_G
 #define _________________QWERTY_L3_________________ KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
@@ -200,3 +278,5 @@ enum user_tapdance {
 
 #define __________________BASE_L0__________________ _________________LOWER_L1__________________
 #define __________________BASE_R0__________________ _________________LOWER_R1__________________
+#endif  // if 0
+// clang-format on
