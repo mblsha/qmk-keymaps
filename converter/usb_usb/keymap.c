@@ -119,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  _________________NORMAN_L1_________________  _________________NORMAN_R1_________________  KC_BSPC,
     CTL_ESC, _________________NORMAN_L2_________________  _________________NORMAN_R2_________________  CTL_ENT,
     ENG_SFT, _________________NORMAN_L3_________________  _________________NORMAN_R3_________________  RUS_SFT,
-             _______, _______, _______, _______,                   _______, _______, _______, _______,
+             _______, XXXXXXX, _______, _______,                   _______, _______, _______, _______,
 
              KC_LALT, KC_LGUI,          KC_RGUI, KC_RALT,
                       _______,          _______,
-    KC_SPC, KC_BSPC,  _______,          _______, _______, KC_RCTRL
+    KC_SPC, XXXXXXX,  _______,          _______, XXXXXXX, XXXXXXX
   ),
 
 #if defined(ENABLE_NORMAN_ENGRUS)
