@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "qmk/**/.build": true,
+    "qmk/**/*.hex": true,
+    "qmk/**/*.bin": true,
+    // Exclude everything but planck and converter/usb_usb
+    "qmk/keyboards/[^cp]*/": true,
+    "qmk/keyboards/[cp][^ol]*/": true,
+    "qmk/keyboards/[cp][ol][^na]*/": true,
+    "qmk/keyboards/[cp][ol][na][^vn]*/": true,
+    "qmk/keyboards/converter/[^u]*/": true,
+    "qmk/users/": true,
+  },
+}

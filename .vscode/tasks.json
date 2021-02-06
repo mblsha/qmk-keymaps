@@ -1,0 +1,51 @@
+{
+  // Note!
+  // You can set the value used for ${config:chrome.outputDir} in your settings.json
+  // file with a line like:
+  // "chrome.outputDir": "/path/to/chromium/src/out/Debug",
+  "version": "2.0.0",
+  "runner": "terminal",
+  // The default problem matcher matches build output, which is useful for most tasks.
+  "problemMatcher": [
+    {
+      "owner": "cpp",
+      "fileLocation": [
+        "relative",
+        "${workspaceRoot}/qmk"
+      ],
+      "pattern": {
+        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|\\w*\\s?error):\\s+(.*)$",
+        "file": 1,
+        "line": 2,
+        "column": 3,
+        "severity": 4,
+        "message": 5
+      }
+    },
+  ],
+  "options": {
+    // It's important to set the CWD to the output directory so that file paths
+    // are linked correctly in the terminal output.
+    "cwd": "${workspaceRoot}"
+  },
+  "tasks": [
+    {
+      "label": "Build Advantage2",
+      "type": "shell",
+      "command": "rake advantage",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build Planck",
+      "type": "shell",
+      "command": "rake planck",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
