@@ -47,9 +47,6 @@ void rgb_set_brightness_to_zero(void) {
 
 void keyboard_post_init_user() {
   set_single_persistent_default_layer(NORMAN_LAYER);
-#if defined(ENABLE_NORMAN_ENGRUS)
-  layer_on(NORMAN_ENG_LAYER);
-#endif  // defined(ENABLE_NORMAN_ENGRUS)
 
 #ifdef RGB_MATRIX_ENABLE
   enable_rgb_without_any_leds_by_default();
@@ -97,7 +94,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif  // defined(ENABLE_GAMEPAD)
 #if defined(ENABLE_NORMAN_ENGRUS)
         layer_off(NORMAN_RUS_LAYER);
-        layer_off(NORMAN_ENG_LAYER);
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
       }
       return false;
@@ -109,7 +105,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif  // defined(ENABLE_GAMEPAD)
 #if defined(ENABLE_NORMAN_ENGRUS)
         layer_off(NORMAN_RUS_LAYER);
-        layer_on(NORMAN_ENG_LAYER);
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
       }
       return false;
@@ -122,7 +117,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LSHIFT);
         if (timer_elapsed(shift_english_timer) < kShiftTimeout) {
           layer_off(NORMAN_RUS_LAYER);
-          layer_on(NORMAN_ENG_LAYER);
 
           SEND_STRING(SS_TAP(X_F20));
         }
@@ -135,7 +129,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_LSHIFT);
         if (timer_elapsed(shift_russian_timer) < kShiftTimeout) {
-          layer_off(NORMAN_ENG_LAYER);
           layer_on(NORMAN_RUS_LAYER);
 
           SEND_STRING(SS_LSFT(SS_TAP(X_F20)));

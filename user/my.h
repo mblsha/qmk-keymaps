@@ -32,7 +32,6 @@ enum user_layers {
   NORMAN_LAYER,
 
 #if defined(ENABLE_NORMAN_ENGRUS)
-  NORMAN_ENG_LAYER,
   NORMAN_RUS_LAYER,
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
 
@@ -204,7 +203,7 @@ enum user_tapdance {
 
 #define _________________NORMAN_R1_________________ KC_J,    KC_U,    KC_R,    KC_L,    KC_SCLN,
 #define _________________NORMAN_R2_________________ KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,
-#define _________________NORMAN_R3_________________ KC_P,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,
+#define _________________NORMAN_R3_________________ KC_P,    KC_M,    NPRG_CM, KC_DOT,  KC_SLSH,
 
 #define _________________PROG___L1_________________ KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,
 #define _________________PROG___L2_________________ KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR,
