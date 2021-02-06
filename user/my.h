@@ -222,13 +222,6 @@ enum user_tapdance {
 #define _________________S_PROG_R2_________________ _______, SPRG_M6, _______, _______, SPRG_M9,
 #define _________________S_PROG_R3_________________ _______, _______, SPRG_L7, SPRG_L8, _______,
 
-#define _________PEDALS__________ KC_LSFT, KC_LCTL, KC_LGUI,
-
-#define __________________________FUNCTION_L___________________________________________ \
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_F6,    KC_F7,   KC_F8,
-#define __________________________FUNCTION_R___________________________________________ \
-        KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_MUTE,  KC_VOLD, KC_VOLU,
-
 #define _________________NUMBERS_L_________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
 #define _________________NUMBERS_R_________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
 

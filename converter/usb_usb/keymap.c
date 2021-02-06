@@ -86,12 +86,17 @@ Bsp Del End     PgD Ent Spc
    KE0,KE3,KE2,K8B,K91,    K2C,    K90,K8A,K88,KE6,KE7,K65,KE4,  K50,K51,K4F,  K62,    K63,K58, K7E,K7B
 */
 
+// FIXME: Could map extra keys to the numpad on the keyboard level to free up the F-keys.
+// FIXME: ScrollLock emits nasty sound when pressed.
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [QWERTY_LAYER] = LAYOUT_advantage2_wrapper(
-    _________PEDALS__________
+    // Pedals
+    KC_LSFT, KC_LCTL, KC_LGUI,
 
-    __________________________FUNCTION_L___________________________________________
-    __________________________FUNCTION_R___________________________________________
+    // Function row
+    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_F6,    KC_F7,   KC_F8,
+                      KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_MUTE,  KC_VOLD, KC_VOLU,
 
     KC_EQL,  _________________NUMBERS_L_________________ _________________NUMBERS_R_________________  KC_MINS,
     KC_TAB,  _________________QWERTY_L1_________________ _________________QWERTY_R1_________________  KC_BSLS,
@@ -139,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______,          _______, _______, _______
   ),
 
-  /* TODO: Do a reverse layout so the Cmd+Keys will work the same as in the english layout */
+  // FIXME: Do a reverse layout so the Cmd+Keys will work the same as in the english layout
   [NORMAN_RUS_LAYER] = LAYOUT_advantage2_wrapper(
     _______, _______, _______,
 
