@@ -199,7 +199,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif  // RGB_MATRIX_ENABLE
     case NPRG_CM: {
       bool SHIFTED = (get_mods() & MOD_BIT(KC_LSHIFT)) ||
-                     (get_mods() & MOD_BIT(KC_RSHIFT));
+                     (get_mods() & MOD_BIT(KC_RSHIFT)) ||
+                     (get_mods() & MOD_BIT(KC_LGUI)) ||
+                     (get_mods() & MOD_BIT(KC_RGUI));
 
       if (record->event.pressed) {
         if (SHIFTED) {
