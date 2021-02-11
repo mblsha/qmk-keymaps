@@ -36,7 +36,6 @@ enum user_layers {
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
 
   NORMAL_PROGRAMMING_LAYER,
-  SHIFT_PROGRAMMING_LAYER,
 
   LOWER_LAYER,
   RAISE_LAYER,
@@ -70,21 +69,45 @@ enum user_keycodes {
   NPRG_CM,
 
   NPRG_SP,
-  SPRG_H1,
-  SPRG_H3,
-  SPRG_H4,
-  SPRG_H7,
-  SPRG_H8,
-  SPRG_H9,
-  SPRG_M0,
-  SPRG_M1,
-  SPRG_M2,
-  SPRG_M4,
-  SPRG_M6,
-  SPRG_M9,
-  SPRG_L4,
-  SPRG_L7,
-  SPRG_L8,
+
+  PRG_H00,
+  PRG_H01,
+  PRG_H02,
+  PRG_H03,
+  PRG_H04,
+  PRG_H05,
+  PRG_H06,
+  PRG_H07,
+  PRG_H08,
+  PRG_H09,
+  PRG_H10,
+  PRG_H11,
+
+  PRG_M00,
+  PRG_M01,
+  PRG_M02,
+  PRG_M03,
+  PRG_M04,
+  PRG_M05,
+  PRG_M06,
+  PRG_M07,
+  PRG_M08,
+  PRG_M09,
+  PRG_M10,
+  PRG_M11,
+
+  PRG_L00,
+  PRG_L01,
+  PRG_L02,
+  PRG_L03,
+  PRG_L04,
+  PRG_L05,
+  PRG_L06,
+  PRG_L07,
+  PRG_L08,
+  PRG_L09,
+  PRG_L10,
+  PRG_L11,
 
 #ifndef NO_DEBUG
   // Print current layer info. Mapping it to F1 is not a bad idea.
@@ -118,7 +141,6 @@ enum user_tapdance {
 #define NEW_SAFE_RANGE (DYNAMIC_MACRO_PLAY2 + 1)
 
 #define NPROGRM OSL(NORMAL_PROGRAMMING_LAYER)
-#define SPROGRM OSL(SHIFT_PROGRAMMING_LAYER)
 
 #if defined(ENABLE_NORMAN_ENGRUS)
 #define ENG_SFT (ENGLISH)
@@ -205,6 +227,20 @@ enum user_tapdance {
 #define _________________NORMAN_R2_________________ KC_Y,    KC_N,    KC_I,    KC_O,    KC_H,
 #define _________________NORMAN_R3_________________ KC_P,    KC_M,    NPRG_CM, KC_DOT,  KC_SLSH,
 
+#define PRG_H01 KC_PERC
+#define PRG_H03 KC_QUES
+#define PRG_H06 KC_DLR
+#define PRG_H07 KC_UNDS
+#define PRG_M04 KC_SCLN
+#define PRG_M06 KC_RCBR
+#define PRG_M08 KC_ASTR
+#define PRG_M09 KC_RPRN
+#define PRG_L01 KC_TILD
+#define PRG_L02 KC_GRV
+#define PRG_L03 KC_CIRC
+#define PRG_L04 KC_DQUO
+#define PRG_L06 KC_BSLS
+#define PRG_L07 KC_COMM
 #define _________________PROG___L1_________________ KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,
 #define _________________PROG___L2_________________ KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR,
 #define _________________PROG___L3_________________ KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE,
@@ -212,14 +248,6 @@ enum user_tapdance {
 #define _________________PROG___R1_________________ KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM,
 #define _________________PROG___R2_________________ KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS,
 #define _________________PROG___R3_________________ KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______,
-
-#define _________________S_PROG_L1_________________ _______, SPRG_H1, _______, SPRG_H3, SPRG_H4,
-#define _________________S_PROG_L2_________________ SPRG_M0, SPRG_M1, SPRG_M2, _______, SPRG_M4,
-#define _________________S_PROG_L3_________________ _______, _______, _______, _______, SPRG_L4,
-
-#define _________________S_PROG_R1_________________ _______, _______, SPRG_H7, SPRG_H8, SPRG_H9,
-#define _________________S_PROG_R2_________________ _______, SPRG_M6, _______, _______, SPRG_M9,
-#define _________________S_PROG_R3_________________ _______, _______, SPRG_L7, SPRG_L8, _______,
 
 #define _________________NUMBERS_L_________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
 #define _________________NUMBERS_R_________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,

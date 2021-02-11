@@ -55,11 +55,46 @@ void keyboard_post_init_user() {
 
 // Redefine process_record_keymap() in keymap definitions.
 __attribute__((weak)) bool process_record_keymap(uint16_t keycode,
-                                                 keyrecord_t *record) {
+                                                 keyrecord_t* record) {
   return true;
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool unregister_mod(int mod) {
+  const bool down = get_mods() & MOD_BIT(mod);
+  if (!down) return false;
+  unregister_code(mod);
+  return true;
+}
+
+void register_mod(int mod, bool down) {
+  if (down) {
+    register_code(mod);
+  }
+}
+
+bool prg_key_mod(const char* text, int mod) {
+  const bool down = get_mods() & MOD_BIT(mod);
+  if (!down || !text) return false;
+
+  unregister_code(mod);
+  send_string_P(text);
+  register_code(mod);
+  return true;
+}
+
+void prg_key(keyrecord_t* record, const char* norm, const char* shift,
+             const char* ctrl) {
+  if (!record->event.pressed) return;
+
+  if (prg_key_mod(shift, KC_LSHIFT)) return;
+  if (prg_key_mod(shift, KC_RSHIFT)) return;
+  if (prg_key_mod(ctrl, KC_LCTRL)) return;
+  if (prg_key_mod(ctrl, KC_RCTRL)) return;
+
+  send_string_P(norm);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 #if defined(ENABLE_NORMAN_ENGRUS)
   static uint16_t shift_english_timer;
   static uint16_t shift_russian_timer;
@@ -145,7 +180,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
         layer_off(NORMAL_PROGRAMMING_LAYER);
-        layer_off(SHIFT_PROGRAMMING_LAYER);
       }
       return false;
     case SEND_VERSION:
@@ -198,10 +232,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
 #endif  // RGB_MATRIX_ENABLE
     case NPRG_CM: {
-      bool SHIFTED = (get_mods() & MOD_BIT(KC_LSHIFT)) ||
-                     (get_mods() & MOD_BIT(KC_RSHIFT)) ||
-                     (get_mods() & MOD_BIT(KC_LGUI)) ||
-                     (get_mods() & MOD_BIT(KC_RGUI));
+      const bool SHIFTED = (get_mods() & MOD_BIT(KC_LSHIFT)) ||
+                           (get_mods() & MOD_BIT(KC_RSHIFT)) ||
+                           (get_mods() & MOD_BIT(KC_LGUI)) ||
+                           (get_mods() & MOD_BIT(KC_RGUI));
 
       if (record->event.pressed) {
         if (SHIFTED) {
@@ -226,79 +260,87 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(", ");
       }
       break;
-    case SPRG_H1:
+#define PRG1(name, norm)               \
+  case PRG_##name:                     \
+    prg_key(record, PSTR(norm), 0, 0); \
+    break;
+#define PRG2(name, norm, shift)                  \
+  case PRG_##name:                               \
+    prg_key(record, PSTR(norm), PSTR(shift), 0); \
+    break;
+#define PRG3(name, norm, shift, ctrl)                     \
+  case PRG_##name:                                        \
+    prg_key(record, PSTR(norm), PSTR(shift), PSTR(ctrl)); \
+    break;
+
+      // 528 bytes free with single-char keys
+      // 870 bytes free after moving single-char keys to the matrix
+
+      /* PRG1(H01, "%") */
+      PRG2(H02, "&", "&&")
+      /* PRG1(H03, "?") */
+      PRG3(H04, "+", "+=", "++")
+      PRG3(H05, "@", "@q", "@@")
+      /* PRG1(H06, "$") */
+      /* PRG1(H07, "_") */
+      PRG2(H08, "[", "[]")
+      PRG2(H09, "]", "->")
+      PRG2(H10, "!", "!=")
+
+      PRG2(M01, "/", "/=")
+      PRG2(M02, "(", "()")
+      PRG2(M03, "=", "==")
+      /* PRG1(M04, ";") */
+      PRG2(M05, "{", "{}")
+      /* PRG1(M06, "}") */
+      PRG3(M07, ":", "::", ":=")
+      /* PRG1(M08, "*") */
+      /* PRG1(M09, ")") */
+      PRG3(M10, "-", "!=", "--")
+
+      /* PRG1(L01, "~") */
+      /* PRG1(L02, "`") */
+      /* PRG1(L03, "^") */
+      /* PRG1(L04, "\"") */
+      PRG2(L05, "|", "||")
+      /* PRG1(L06, "\\") */
+      /* PRG1(L07, ",") */
+      PRG2(L08, "#", "<=")
+      PRG2(L09, "'", ">=")
+
+      // http://www.keyboard-layout-editor.com/#/gists/db89ac8421bfd94801e004ec7a1c828a
+    case PRG_H00:
+    case PRG_H11:
       if (record->event.pressed) {
-        SEND_STRING("&&");
-      }
-      break;
-    case SPRG_H3:
-      if (record->event.pressed) {
-        SEND_STRING("+=");
-      }
-      break;
-    case SPRG_H4:
-      if (record->event.pressed) {
-        SEND_STRING("@q");
-      }
-      break;
-    case SPRG_H7:
-      if (record->event.pressed) {
-        SEND_STRING("[]");
-      }
-      break;
-    case SPRG_H8:
-      if (record->event.pressed) {
-        SEND_STRING("->");
-      }
-      break;
-    case SPRG_H9:
-      if (record->event.pressed) {
-        SEND_STRING("!=");
-      }
-      break;
-    case SPRG_M0:
-      if (record->event.pressed) {
-        SEND_STRING("/=");
-      }
-      break;
-    case SPRG_M1:
-      if (record->event.pressed) {
-        SEND_STRING("()");
-      }
-      break;
-    case SPRG_M2:
-      if (record->event.pressed) {
-        SEND_STRING("==");
-      }
-      break;
-    case SPRG_M4:
-      if (record->event.pressed) {
-        SEND_STRING("{}");
-      }
-      break;
-    case SPRG_M6:
-      if (record->event.pressed) {
-        SEND_STRING("::");
-      }
-      break;
-    case SPRG_M9:
-      if (record->event.pressed) {
-        SEND_STRING("-=");
-      }
-      break;
-    case SPRG_L4:
-      if (record->event.pressed) {
-        SEND_STRING("||");
-      }
-      break;
-    case SPRG_L7:
-      if (record->event.pressed) {
-        SEND_STRING("<=");
-      }
-      break;
-    case SPRG_L8:
-      if (record->event.pressed) {
-        SEND_STRING(">=");
+        const bool lshift = unregister_mod(KC_LSHIFT);
+        const bool rshift = unregister_mod(KC_RSHIFT);
+        const bool lctrl = unregister_mod(KC_LCTRL);
+        const bool rctrl = unregister_mod(KC_RCTRL);
+        register_code(KC_LCTRL);
+        tap_code(KC_E);
+        unregister_code(KC_LCTRL);
+        if (keycode == PRG_H00) {
+          if (lshift || rshift) {
+            tap_code(KC_SCOLON);
+          } else if (lctrl || rctrl) {
+            register_code(KC_LSHIFT);
+            tap_code(KC_SCOLON);
+            unregister_code(KC_LSHIFT);
+          }
+          tap_code(KC_ENTER);
+        } else {
+          tap_code(KC_SPACE);
+          register_code(KC_LSHIFT);
+          tap_code(KC_LBRC);
+          unregister_code(KC_LSHIFT);
+          if (!lshift && !rshift) {
+            tap_code(KC_ENTER);
+          }
+        }
+        register_mod(KC_RCTRL, rctrl);
+        register_mod(KC_LCTRL, lctrl);
+        register_mod(KC_RSHIFT, rshift);
+        register_mod(KC_LSHIFT, lshift);
       }
       break;
   }
