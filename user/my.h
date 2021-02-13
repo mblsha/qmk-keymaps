@@ -241,13 +241,12 @@ enum user_tapdance {
 #define PRG_L04 KC_DQUO
 #define PRG_L06 KC_BSLS
 #define PRG_L07 KC_COMM
-#define _________________PROG___L1_________________ KC_PERC, KC_AMPR, KC_QUES, KC_PLUS, KC_AT,
-#define _________________PROG___L2_________________ KC_SLSH, KC_LPRN, KC_EQL,  KC_SCLN, KC_LCBR,
-#define _________________PROG___L3_________________ KC_TILD, KC_GRV,  KC_CIRC, KC_DQUO, KC_PIPE,
-
-#define _________________PROG___R1_________________ KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM,
-#define _________________PROG___R2_________________ KC_RCBR, KC_COLN, KC_ASTR, KC_RPRN, KC_MINS,
-#define _________________PROG___R3_________________ KC_BSLS, KC_COMM, KC_HASH, KC_QUOT, _______,
+#define __________________________PROG__L1__________________ PRG_H00, PRG_H01, PRG_H02, PRG_H03, PRG_H04, PRG_H05,
+#define _________________PROG__R1___________________________ PRG_H06, PRG_H07, PRG_H08, PRG_H09, PRG_H10, PRG_H11,
+#define __________________________PROG__L2__________________ KC_LCTL, PRG_M01, PRG_M02, PRG_M03, PRG_M04, PRG_M05,
+#define _________________PROG__R2___________________________ PRG_M06, PRG_M07, PRG_M08, PRG_M09, PRG_M10, KC_RCTL,
+#define __________________________PROG__L3__________________ KC_LSFT, PRG_L01, PRG_L02, PRG_L03, PRG_L04, PRG_L05,
+#define _________________PROG__R3___________________________ PRG_L06, PRG_L07, PRG_L08, PRG_L09, PRG_L10, KC_RSFT,
 
 #define _________________NUMBERS_L_________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
 #define _________________NUMBERS_R_________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,

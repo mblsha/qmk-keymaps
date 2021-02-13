@@ -137,10 +137,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                 └─────┴─────┴─────┴─────┴─────┴───────────┴─────┴─────┴─────┴─────┴─────┘
    */
   [NORMAL_PROGRAMMING_LAYER] = LAYOUT_planck_grid_wrapper(
-    PRG_H00, PRG_H01, PRG_H02, PRG_H03, PRG_H04, PRG_H05, PRG_H06, PRG_H07, PRG_H08, PRG_H09, PRG_H10, PRG_H11,
-    KC_LCTL, PRG_M01, PRG_M02, PRG_M03, PRG_M04, PRG_M05, PRG_M06, PRG_M07, PRG_M08, PRG_M09, PRG_M10, KC_RCTL,
-    KC_LSFT, PRG_L01, PRG_L02, PRG_L03, PRG_L04, PRG_L05, PRG_L06, PRG_L07, PRG_L08, PRG_L09, PRG_L10, KC_RSFT,
-    _______, _______, _______, _______, _______, NPRG_SP, NPRG_SP, _______, _______, _______, _______, _______
+    __________________________PROG__L1__________________  _________________PROG__R1___________________________
+    __________________________PROG__L2__________________  _________________PROG__R2___________________________
+    __________________________PROG__L3__________________  _________________PROG__R3___________________________
+    STCH_EX, STCH_EX, _______, _______, STCH_EX, NPRG_SP, NPRG_SP, STCH_EX, _______, _______, STCH_EX, STCH_EX
   ),
 
   /* Symbol layer
