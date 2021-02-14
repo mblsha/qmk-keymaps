@@ -241,6 +241,8 @@ enum user_tapdance {
 #define PRG_L04 KC_DQUO
 #define PRG_L06 KC_BSLS
 #define PRG_L07 KC_COMM
+// Option-Backspace
+#define PRG_OBS LALT(KC_BSPACE)
 #define __________________________PROG__L1__________________ PRG_H00, PRG_H01, PRG_H02, PRG_H03, PRG_H04, PRG_H05,
 #define _________________PROG__R1___________________________ PRG_H06, PRG_H07, PRG_H08, PRG_H09, PRG_H10, PRG_H11,
 #define __________________________PROG__L2__________________ KC_LCTL, PRG_M01, PRG_M02, PRG_M03, PRG_M04, PRG_M05,
