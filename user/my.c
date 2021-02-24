@@ -296,7 +296,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       PRG3(M07, ":", "::", ":=")
       /* PRG1(M08, "*") */
       /* PRG1(M09, ")") */
-      PRG3(M10, "-", "!=", "--")
+      PRG3(M10, "-", "-=", "--")
 
       /* PRG1(L01, "~") */
       /* PRG1(L02, "`") */
