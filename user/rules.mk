@@ -4,6 +4,10 @@ CONSOLE_ENABLE  = no   # required to make printf work
 MIDI_ENABLE     = no
 TAP_DANCE_ENABLE = yes
 
+# mblsha: Maybe this will fix the USB_USB not working and requiring a re-plug
+# every now and then.
+NO_USB_STARTUP_CHECK = yes # Disables usb suspend check after keyboard startup
+
 SRC += my.c
 SRC += my_tapdance.c
 
