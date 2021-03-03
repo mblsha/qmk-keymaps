@@ -121,9 +121,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ENG_SFT, _________________NORMAN_L3_________________  _________________NORMAN_R3_________________  RUS_SFT,
              GUI_L,   HYPER_L, KC_LALT, KC_LGUI,                   KC_RGUI, KC_RALT, HYPER_R, GUI_R,
 
-             XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,
+             KC_SPC,  XXXXXXX,          XXXXXXX, XXXXXXX,
                       _______,          _______,
-    LOWER,   KC_BSPC, _______,          _______, KC_SPC,  KC_SPC
+    LOWER,   KC_BSPC, _______,          _______, KC_ENT,  KC_SPC
   ),
 
 #if defined(ENABLE_NORMAN_ENGRUS)
