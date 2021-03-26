@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ENG_SFT, _________________NORMAN_L3_________________  _________________NORMAN_R3_________________  RUS_SFT,
              GUI_L,   HYPER_L, KC_LALT, KC_LGUI,                   KC_RGUI, KC_RALT, HYPER_R, GUI_R,
 
-             KC_SPC,  XXXXXXX,          XXXXXXX, XXXXXXX,
+             KC_SPC,  XXXXXXX,          XXXXXXX, KC_ESC,
                       _______,          _______,
     LOWER,   KC_BSPC, _______,          LOWR_TG, KC_ENT,  KC_SPC
   ),
@@ -136,12 +136,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
 #if 0  // Make it key-compatible with Russian-PC layout
+
+    // It's possible to use Raw HID to automatically switch layers from a
+    // computer: https://docs.qmk.fm/#/feature_rawhid
+
     // http://www.keyboard-layout-editor.com/#/gists/e322e7feda873f8601d10ec4c88ab53e
     _______, KC_W,    KC_M,    KC_Z,    _______, KC_SLSH, KC_P,    KC_D,    KC_R,    KC_L,    KC_X,    _______,
     _______, KC_E,    KC_B,    KC_T,    KC_J,    KC_F,    KC_K,    KC_Y,    KC_N,    KC_C,    KC_H,    _______,
     ENG_SFT, KC_A,    KC_QUOT, KC_LBRC, KC_S,    KC_DOT,  KC_COMM, KC_V,    KC_G,    KC_U,    KC_SCLN, RUS_SFT,
 #else
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SCLN, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     ENG_SFT, TD_ZGRV, _______, TD_CQUO, _______, _______, _______, _______, KC_COMM, TD_DLBC, TD_SRBC, RUS_SFT,
 #endif
