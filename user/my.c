@@ -94,12 +94,25 @@ void prg_key(keyrecord_t* record, const char* norm, const char* shift,
   send_string_P(norm);
 }
 
+// Return false to halt further processing
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 #if defined(ENABLE_NORMAN_ENGRUS)
   static uint16_t shift_english_timer;
   static uint16_t shift_russian_timer;
   static uint16_t kShiftTimeout = 150;
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
+
+  // prevent NORMAL_PROGRAMMING_LAYER from getting stuck.
+  // it's the only oneshot layer I use so far.
+  static int oneshot_count = 0;
+  if (record->event.pressed) {
+    // Ideally we should prevent pressing modifiers from incrementing the
+    // counter.
+    ++oneshot_count;
+    if (oneshot_count > 2) {
+      layer_off(NORMAL_PROGRAMMING_LAYER);
+    }
+  }
 
   /* if (!process_record_dynamic_macro(keycode, record)) { */
   /*   return false; */
@@ -243,12 +256,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
           // FIXME: doesn't work due to this change:
           // https://github.com/qmk/qmk_firmware/pull/8832
           set_oneshot_layer(NORMAL_PROGRAMMING_LAYER, ONESHOT_START);
+          oneshot_count = 0;
         }
       } else {
         if (SHIFTED) {
           // noop
         } else {
           clear_oneshot_layer_state(ONESHOT_PRESSED);
+          oneshot_count = 0;
         }
       }
       return false;
