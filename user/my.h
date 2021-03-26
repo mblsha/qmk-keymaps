@@ -151,6 +151,7 @@ enum user_tapdance {
 #endif  // defined(ENABLE_NORMAN_ENGRUS)
 
 #define LOWER MO(LOWER_LAYER)
+#define LOWR_TG TG(LOWER_LAYER)
 #define RAISE MO(RAISE_LAYER)
 
 // Double-action home row
@@ -253,12 +254,12 @@ enum user_tapdance {
 #define _________________NUMBERS_L_________________ KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
 #define _________________NUMBERS_R_________________ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
 
-#define __________________________LOWER_L1__________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-#define _________________LOWER_R1___________________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,
+#define __________________________LOWER_L1__________________ XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_Z,
+#define _________________LOWER_R1___________________________ KC_J,    KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_DEL,
 #define __________________________LOWER_L2__________________ XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX,
-#define _________________LOWER_R2___________________________ XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
+#define _________________LOWER_R2___________________________ KC_Z,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
 #define __________________________LOWER_L3__________________ KC_LSFT, LGUI(KC_LEFT), LGUI(KC_UP), LGUI(KC_DOWN), LGUI(KC_RGHT), XXXXXXX,
-#define _________________LOWER_R3___________________________ XXXXXXX, LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), KC_RSFT,
+#define _________________LOWER_R3___________________________ KC_P,    LALT(KC_LEFT), LALT(KC_DOWN), LALT(KC_UP), LALT(KC_RGHT), KC_RSFT,
 
 #if 0
 #define _________________QWERTY_L1_________________ KC_Q,    KC_W,    KC_E,    KC_R,    KC_T

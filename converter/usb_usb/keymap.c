@@ -123,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
              KC_SPC,  XXXXXXX,          XXXXXXX, XXXXXXX,
                       _______,          _______,
-    LOWER,   KC_BSPC, _______,          LOWER,   KC_ENT,  KC_SPC
+    LOWER,   KC_BSPC, _______,          LOWR_TG, KC_ENT,  KC_SPC
   ),
 
 #if defined(ENABLE_NORMAN_ENGRUS)
