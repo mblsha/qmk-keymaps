@@ -89,6 +89,9 @@ Bsp Del End     PgD Ent Spc
 // FIXME: Could map extra keys to the numpad on the keyboard level to free up the F-keys.
 // FIXME: ScrollLock emits nasty sound when pressed.
 
+// TODO: maybe tap-dance could be used on the pedals:
+// https://blog.zsa.io/2103-tap-dance-layers/
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [QWERTY_LAYER] = LAYOUT_advantage2_wrapper(
     // Pedals
@@ -112,8 +115,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NORMAN_LAYER] = LAYOUT_advantage2_wrapper(
     _______, _______, _______,
 
-    _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                      _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_BRID, KC_BRIU, _______, KC_MPLY, KC_MPRV, KC_MNXT, _______, _______,
+                      _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,
 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_TAB,  _________________NORMAN_L1_________________  _________________NORMAN_R1_________________  KC_BSPC,
